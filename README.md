@@ -1,9 +1,7 @@
-# GlOBALSTAY
-🌍 GlobalStay – A modern hotel booking platform where travelers explore, book, and enjoy stays with ease.
 # 🌍 GlobalStay  
 
 <p align="center">
-  <img src="assets/logo.png" alt="GlobalStay Logo" width="150"/>
+  <img src="media/logo.png" alt="GlobalStay Logo" width="150"/>
 </p>
 
 <p align="center">
@@ -28,7 +26,7 @@ It’s designed with elegance, user-friendliness, and functionality in mind.
 
 ## 📂 Project Structure  
 /globalstay
-│── /assets # Images, logos, styles
+│── /media # Images, logos, styles
 │── /pages
 │ ├── index.html # Landing Page
 │ ├── book.html # Booking Page
