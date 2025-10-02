@@ -86,4 +86,4 @@ Submit a pull request
 📜 License
 This project is licensed under the MIT License.
 
-<p align="center"> Made with ❤️ by <b>GlobalStay</b> </p> ```
+<p align="center"> Made with ❤️ by <b>WEBORA</b> </p> ```
