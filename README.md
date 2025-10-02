@@ -1,7 +1,7 @@
 # 🌍 GlobalStay  
 
 <p align="center">
-  <img src="media/logo.png" alt="GlobalStay Logo" width="300"/>
+  <img src="media/logo.png" alt="GlobalStay Logo" width="400"/>
 </p>
 
 <p align="center">
