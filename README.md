@@ -26,19 +26,27 @@ It’s designed with elegance, user-friendliness, and functionality in mind.
 
 ## 📂 Project Structure  
 /globalstay
+
 │── /media # Images, logos, styles
 
 │── /pages
+
 │ ├── index.html # Landing Page
+
 │ ├── book.html # Booking Page
+
 │ ├── about.html # About Us Page
+
 │ ├── auth.html # Signup & Login Page
 
 │── /css
+
 │ └── style.css # Main stylesheet
 
 │── /js
+
 │ └── main.js # JavaScript functionality
+
 │── README.md # Project documentation
 
 ---
