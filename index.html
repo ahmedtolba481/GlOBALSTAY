@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Globalstay - Hotels & Resorts Worldwide</title>
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!---custom css-->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+            src="img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+            alt="Globalstay"
+          />
+          <span>Globalstay</span>
+        </a>
+
+        <button
+          title="toggle nav"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#hotels">Hotels</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#why">Why Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item ms-2">
+              <a class="btn btn-book" href="#" onclick="openBooking()"
+                >Book Now</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+              <h1 class="hero-title">Discover a World of Amazing Hotels</h1>
+              <p class="hero-subtitle">
+                Enjoy an exceptional booking experience with the best offers,
+                competitive prices, and 24/7 customer service
+              </p>
+              <div class="mt-4">
+                <a href="#hotels" class="btn btn-outline-light me-3 btn-lg"
+                  >Browse Hotels</a
+                >
+                <a href="#" class="btn btn-book btn-lg" onclick="openBooking()"
+                  >Start Booking</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="search-card mt-5 mt-lg-0">
+              <h4 class="text-white mb-4 text-center">
+                Find Your Perfect Hotel
+              </h4>
+              <form class="row g-3" id="searchForm">
+                <div class="col-12">
+                  <label class="form-label">Destination</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="destinationInput"
+                    placeholder="Where do you want to go?"
+                    list="citySuggestions"
+                    required
+                  />
+                  <datalist id="citySuggestions">
+                    <option value="Alexandria">Alexandria - الإسكندرية</option>
+                    <option value="Cairo">Cairo - القاهرة</option>
+                    <option value="Luxor">Luxor - الأقصر</option>
+                    <option value="Aswan">Aswan - أسوان</option>
+                    <option value="Hurghada">Hurghada - الغردقة</option>
+                    <option value="Sharm El Sheikh">
+                      Sharm El Sheikh - شرم الشيخ
+                    </option>
+                    <option value="Marsa Matruh">
+                      Marsa Matruh - مرسى مطروح
+                    </option>
+                  </datalist>
+                  <div class="popular-destinations mt-2">
+                    <small class="text-white-50">Popular destinations: </small>
+                    <span
+                      class="destination-chip"
+                      onclick="setDestination('Alexandria')"
+                      >Alexandria</span
+                    >
+                    <span
+                      class="destination-chip"
+                      onclick="setDestination('Cairo')"
+                      >Cairo</span
+                    >
+                    <span
+                      class="destination-chip"
+                      onclick="setDestination('Hurghada')"
+                      >Hurghada</span
+                    >
+                    <span
+                      class="destination-chip"
+                      onclick="setDestination('Sharm El Sheikh')"
+                      >Sharm El Sheikh</span
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Check-in Date</label>
+                  <input
+                    title="check in date"
+                    type="date"
+                    class="form-control"
+                    id="checkinDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Check-out Date</label>
+                  <input
+                    title="check out date"
+                    type="date"
+                    class="form-control"
+                    id="checkoutDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Rooms</label>
+                  <select
+                    title="select rooms"
+                    class="form-select"
+                    id="roomsSelect"
+                    required
+                  >
+                    <option value="">Select Rooms</option>
+                    <option>1 Room</option>
+                    <option>2 Rooms</option>
+                    <option>3 Rooms</option>
+                    <option>4+ Rooms</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Guests</label>
+                  <select
+                    title="select guests"
+                    class="form-select"
+                    id="guestsSelect"
+                    required
+                  >
+                    <option value="">Select Guests</option>
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-book w-100 mt-2">
+                    Search Hotels
+                  </button>
+                </div>
+              </form>
+              <small class="d-block mt-3 text-white-50 text-center"
+                >Best Price Guarantee · Instant Confirmation · Secure
+                Payment</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <section id="searchResults" class="section search-results-section">
+      <div class="container">
+        <div class="search-results-header">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h2 class="section-title mb-3">Search Results</h2>
+              <p class="mb-0 mt-2" id="resultsCount">Showing 0 hotels</p>
+            </div>
+            <div class="col-md-4 text-end">
+              <button class="btn btn-outline-primary" onclick="showAllHotels()">
+                <i class="fas fa-arrow-left me-2"></i>Back to All Hotels
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-criteria mb-4">
+          <div class="row">
+            <div class="col-md-3">
+              <strong>Destination:</strong>
+              <span id="criteriaDestination">-</span>
+            </div>
+            <div class="col-md-2">
+              <strong>Check-in:</strong> <span id="criteriaCheckin">-</span>
+            </div>
+            <div class="col-md-2">
+              <strong>Check-out:</strong> <span id="criteriaCheckout">-</span>
+            </div>
+            <div class="col-md-2">
+              <strong>Rooms:</strong> <span id="criteriaRooms">-</span>
+            </div>
+            <div class="col-md-3">
+              <strong>Guests:</strong> <span id="criteriaGuests">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" id="searchResultsContainer">
+          <!-- Search results will be dynamically inserted here -->
+        </div>
+
+        <div class="no-results" id="noResultsMessage" style="display: none">
+          <div class="no-results-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>No hotels found</h3>
+          <p class="text-muted">
+            We couldn't find any hotels matching your search criteria. Please
+            try different dates or destination.
+          </p>
+          <button class="btn btn-book mt-3" onclick="showAllHotels()">
+            Browse All Hotels
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Hotels -->
+    <section id="hotels" class="section">
+      <div class="container">
+        <h2 class="section-title text-center">Our Featured Hotels</h2>
+        <p class="section-subtitle text-center">
+          Discover a curated selection of the best hotels we offer in
+          destinations around the world
+        </p>
+
+        <div class="row g-4" id="allHotelsContainer">
+          <!-- Hotel 1 - Alexandria -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="alexandria"
+            data-price="120"
+            data-rating="5"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">Beachfront</span>
+                <img
+                  src="img/photo-1551882547-ff40c63fe5fa.avif"
+                  alt="Seaside Hotel"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Mediterranean Resort</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★★</div>
+                  <div class="price-tag">$120 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Sea view · Free breakfast · Free Wi-Fi
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Mediterranean Resort')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotel 2 - Cairo -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="cairo"
+            data-price="89"
+            data-rating="4"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">City Center</span>
+                <img
+                  src="img/photo-1551882547-ff40c63fe5fa.avif"
+                  alt="City Central Hotel"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Nile View Hotel</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★☆</div>
+                  <div class="price-tag">$89 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Central location · Free cancellation · Parking
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Nile View Hotel')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotel 3 - Luxor -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="luxor"
+            data-price="145"
+            data-rating="5"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">Historic</span>
+                <img
+                  src="img/photo-1611892440504-42a792e24d32.avif"
+                  alt="Garden Suite"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Pharaoh's Palace</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★★</div>
+                  <div class="price-tag">$145 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Luxury suite · Breakfast & Spa · Room service
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Pharaoh\'s Palace')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotel 4 - Hurghada -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="hurghada"
+            data-price="110"
+            data-rating="4"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">Beach Resort</span>
+                <img
+                  src="img/photo-1611892440504-42a792e24d32.avif"
+                  alt="Family Resort"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Red Sea Resort</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★☆</div>
+                  <div class="price-tag">$110 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Kids club · Swimming pool · Family rooms
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Red Sea Resort')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotel 5 - Sharm El Sheikh -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="sharm el sheikh"
+            data-price="95"
+            data-rating="4"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">Diving</span>
+                <img
+                  src="img/photo-1564501049412-61c2a3083791.avif"
+                  alt="Business Hotel"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Coral Bay Hotel</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★☆</div>
+                  <div class="price-tag">$95 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Conference rooms · Business center · Airport shuttle
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Coral Bay Hotel')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotel 6 - Marsa Matruh -->
+          <div
+            class="col-md-4 hotel-item"
+            data-destination="marsa matruh"
+            data-price="160"
+            data-rating="5"
+          >
+            <div class="hotel-card">
+              <div class="position-relative">
+                <span class="badge-featured">Romantic</span>
+                <img
+                  src="img/photo-1520250497591-112f2f40a3f4.avif"
+                  alt="Romantic Getaway"
+                  class="hotel-img"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Mediterranean Paradise</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <div class="stars">★★★★★</div>
+                  <div class="price-tag">$160 / night</div>
+                </div>
+                <p class="text-muted mb-3">
+                  Private balcony · Couples massage · Fine dining
+                </p>
+                <div class="d-flex">
+                  <a
+                    href="#"
+                    class="btn btn-outline-primary me-2 flex-fill"
+                    onclick="openHotelDetails('Mediterranean Paradise')"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="btn btn-book flex-fill"
+                    onclick="openBooking()"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Hotels Dropdown -->
+        <div class="mt-5">
+          <button
+            class="btn btn-outline-primary btn-lg w-100 view-all-btn collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#additionalHotels"
+          >
+            View All Hotels
+          </button>
+
+          <div class="collapse mt-4" id="additionalHotels">
+            <div class="row g-4">
+              <!-- Additional Hotel 1 - Aswan -->
+              <div
+                class="col-md-4 hotel-item"
+                data-destination="aswan"
+                data-price="180"
+                data-rating="5"
+              >
+                <div class="hotel-card">
+                  <div class="position-relative">
+                    <span class="badge-featured">Nile View</span>
+                    <img
+                      src="img/photo-1542314831-068cd1dbfeeb.avif"
+                      alt="Beach Resort"
+                      class="hotel-img"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Aswan Grand Hotel</h5>
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <div class="stars">★★★★★</div>
+                      <div class="price-tag">$180 / night</div>
+                    </div>
+                    <p class="text-muted mb-3">
+                      Private beach · Water sports · All-inclusive
+                    </p>
+                    <div class="d-flex">
+                      <a
+                        href="#"
+                        class="btn btn-outline-primary me-2 flex-fill"
+                        onclick="openHotelDetails('Aswan Grand Hotel')"
+                        >Details</a
+                      >
+                      <a
+                        href="#"
+                        class="btn btn-book flex-fill"
+                        onclick="openBooking()"
+                        >Book Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Hotel 2 - Cairo -->
+              <div
+                class="col-md-4 hotel-item"
+                data-destination="cairo"
+                data-price="130"
+                data-rating="4"
+              >
+                <div class="hotel-card">
+                  <div class="position-relative">
+                    <span class="badge-featured">Pyramids View</span>
+                    <img
+                      src="img/photo-1566073771259-6a8506099945.avif"
+                      alt="Mountain Lodge"
+                      class="hotel-img"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Pyramids View Hotel</h5>
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <div class="stars">★★★★☆</div>
+                      <div class="price-tag">$130 / night</div>
+                    </div>
+                    <p class="text-muted mb-3">
+                      Scenic views · Hiking trails · Fireplace
+                    </p>
+                    <div class="d-flex">
+                      <a
+                        href="#"
+                        class="btn btn-outline-primary me-2 flex-fill"
+                        onclick="openHotelDetails('Pyramids View Hotel')"
+                        >Details</a
+                      >
+                      <a
+                        href="#"
+                        class="btn btn-book flex-fill"
+                        onclick="openBooking()"
+                        >Book Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Hotel 3 - Luxor -->
+              <div
+                class="col-md-4 hotel-item"
+                data-destination="luxor"
+                data-price="125"
+                data-rating="4"
+              >
+                <div class="hotel-card">
+                  <div class="position-relative">
+                    <span class="badge-featured">Historic</span>
+                    <img
+                      src="img/photo-1522798514-97ceb8c4f1c8.avif"
+                      alt="Historic Inn"
+                      class="hotel-img"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Valley of Kings Resort</h5>
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <div class="stars">★★★★☆</div>
+                      <div class="price-tag">$125 / night</div>
+                    </div>
+                    <p class="text-muted mb-3">
+                      Heritage building · Antique furniture · Guided tours
+                    </p>
+                    <div class="d-flex">
+                      <a
+                        href="#"
+                        class="btn btn-outline-primary me-2 flex-fill"
+                        onclick="openHotelDetails('Valley of Kings Resort')"
+                        >Details</a
+                      >
+                      <a
+                        href="#"
+                        class="btn btn-book flex-fill"
+                        onclick="openBooking()"
+                        >Book Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section id="why" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">Why Choose Globalstay?</h2>
+        <p class="section-subtitle text-center">
+          We provide a unique booking experience that makes your trip
+          unforgettable
+        </p>
+
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="why-us-item">
+              <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
+              <h5>24/7 Support</h5>
+              <p class="text-muted">
+                Support team available 24/7 to assist you with any inquiry or
+                emergency
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="why-us-item">
+              <div class="why-icon"><i class="fa-solid fa-tag"></i></div>
+              <h5>Competitive Prices</h5>
+              <p class="text-muted">
+                Our prices are competitive with best price guarantee and
+                exclusive offers
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="why-us-item">
+              <div class="why-icon"><i class="fa-solid fa-ban"></i></div>
+              <h5>Free Cancellation</h5>
+              <p class="text-muted">
+                Free cancellation on most options up to 24 hours before your
+                stay
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="why-us-item">
+              <div class="why-icon"><i class="fa-solid fa-star"></i></div>
+              <h5>Real Reviews</h5>
+              <p class="text-muted">
+                Verified ratings and reviews from real guests to help you choose
+                with confidence
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section">
+      <div class="container">
+        <h2 class="section-title text-center">What Our Customers Say</h2>
+        <p class="section-subtitle text-center">
+          Real opinions and ratings from guests who have used our services
+        </p>
+
+        <div
+          id="testimonialCarousel"
+          class="carousel slide testimonial-carousel"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="testimonial">
+                    <div class="d-flex align-items-center mb-4">
+                      <img src="img/32.jpg" alt="Ahmed Ali" />
+                      <div class="ms-3">
+                        <h5 class="mb-1">Ahmed Ali</h5>
+                        <small class="text-muted"
+                          >Stayed at Mediterranean Resort</small
+                        >
+                      </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="mb-0">
+                      "Amazing stay — excellent service and fantastic view. Will
+                      book again! The staff exceeded our expectations to make
+                      our stay comfortable."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="testimonial">
+                    <div class="d-flex align-items-center mb-4">
+                      <img src="img/44.jpg" alt="Sarah Mohamed" />
+                      <div class="ms-3">
+                        <h5 class="mb-1">Sarah Mohamed</h5>
+                        <small class="text-muted"
+                          >Stayed at Nile View Hotel</small
+                        >
+                      </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="mb-0">
+                      "Excellent location and very helpful staff. Highly
+                      recommended. The room was spacious and clean, exactly as
+                      shown in the photos."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="testimonial">
+                    <div class="d-flex align-items-center mb-4">
+                      <img src="img/65.jpg" alt="Layla Hassan" />
+                      <div class="ms-3">
+                        <h5 class="mb-1">Layla Hassan</h5>
+                        <small class="text-muted"
+                          >Stayed at Pharaoh's Palace</small
+                        >
+                      </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="mb-0">
+                      "I loved my stay at Pharaoh's Palace! The spa was amazing
+                      and breakfast was delicious. Will definitely return
+                      again."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="testimonial">
+                    <div class="d-flex align-items-center mb-4">
+                      <img src="img/22.jpg" alt="John Smith" />
+                      <div class="ms-3">
+                        <h5 class="mb-1">John Smith</h5>
+                        <small class="text-muted"
+                          >Stayed at Mediterranean Resort</small
+                        >
+                      </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="mb-0">
+                      "Outstanding experience! The hotel exceeded all my
+                      expectations. The staff was incredibly professional and
+                      the amenities were top-notch."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="testimonial">
+                    <div class="d-flex align-items-center mb-4">
+                      <img src="img/33.jpg" alt="Emma Wilson" />
+                      <div class="ms-3">
+                        <h5 class="mb-1">Emma Wilson</h5>
+                        <small class="text-muted"
+                          >Stayed at Nile View Hotel</small
+                        >
+                      </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="mb-0">
+                      "Perfect location for business trips. The room was
+                      comfortable and the internet connection was excellent.
+                      Will definitely stay here again."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            title="previous"
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#testimonialCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            title="next"
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#testimonialCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <h2 class="section-title text-center">Contact Us</h2>
+        <p class="section-subtitle text-center">
+          Get in touch with us for any inquiries or support
+        </p>
+
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="contact-info">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h4>Our Location</h4>
+              <p class="text-muted">123 Hotel Street, Downtown, City 12345</p>
+
+              <div class="contact-icon mt-4">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h4>Phone Number</h4>
+              <p class="text-muted">+1 (555) 123-4567</p>
+
+              <div class="contact-icon mt-4">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h4>Email Address</h4>
+              <p class="text-muted">info@globalstay.com</p>
+
+              <div class="contact-icon mt-4">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h4>Working Hours</h4>
+              <p class="text-muted">24/7 Customer Support</p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="contact-form">
+              <h3 class="mb-4">Send us a Message</h3>
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Full Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Your Name"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Subject</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Message Subject"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Message</label>
+                    <textarea
+                      class="form-control"
+                      rows="6"
+                      placeholder="Your Message"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-book">
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="booking" class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Book Your Next Stay?</h2>
+          <p class="cta-subtitle">
+            Find the best offers and instant confirmation. Start your search now
+            for your perfect trip.
+          </p>
+          <a href="#" class="btn btn-book btn-lg" onclick="openBooking()"
+            >Start Booking Now</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="footer-brand">
+              <img
+                src="img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+                alt="Globalstay"
+              />
+              <span class="footer-brand-text">Globalstay</span>
+            </div>
+            <p>
+              Your trusted partner for finding the perfect accommodation
+              anywhere in the world. We offer the best choices with exceptional
+              customer service.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Company</h5>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Support</h5>
+            <ul class="footer-links">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Destinations</h5>
+            <ul class="footer-links">
+              <li><a href="#">Middle East</a></li>
+              <li><a href="#">Europe</a></li>
+              <li><a href="#">Asia</a></li>
+              <li><a href="#">Americas</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Partners</h5>
+            <ul class="footer-links">
+              <li><a href="#">Hotels</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Travel Agents</a></li>
+              <li><a href="#">Corporate</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p class="mb-0">
+            © <span id="year"></span> Globalstay. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Booking Page -->
+    <div class="booking-page" id="bookingPage">
+      <div class="booking-container">
+        <button class="close-booking" onclick="closeBooking()">&times;</button>
+        <h2 class="section-title mb-4">Book Your Stay</h2>
+
+        <form id="bookingForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="First Name"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="+1 (555) 123-4567"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Check-in Date</label>
+              <input
+                title="check in date"
+                type="date"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Check-out Date</label>
+              <input
+                title="check out date"
+                type="date"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Rooms</label>
+              <select title="select rooms" class="form-select" required>
+                <option value="">Select Rooms</option>
+                <option>1 Room</option>
+                <option>2 Rooms</option>
+                <option>3 Rooms</option>
+                <option>4+ Rooms</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Guests</label>
+              <select title="select guests" class="form-select" required>
+                <option value="">Select Guests</option>
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4+ Guests</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Special Requests</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Any special requests or requirements"
+              ></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-book w-100">
+                Complete Booking
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hotel Details Modal -->
+    <div class="hotel-details-modal" id="hotelDetailsModal">
+      <div class="hotel-details-container">
+        <button class="close-details" onclick="closeHotelDetails()">
+          &times;
+        </button>
+        <h2 class="section-title mb-4" id="hotelDetailsTitle">Hotel Details</h2>
+
+        <div class="hotel-gallery">
+          <img
+            src="img/photo-1551882547-ff40c63fe5fa.avif"
+            alt="Hotel Main"
+            class="gallery-main"
+          />
+          <img
+            src="img/photo-1611892440504-42a792e24d32.avif"
+            alt="Hotel Room"
+          />
+          <img
+            src="img/photo-1564501049412-61c2a3083791.avif"
+            alt="Hotel Bathroom"
+          />
+          <img
+            src="img/photo-1520250497591-112f2f40a3f4.avif"
+            alt="Hotel View"
+          />
+          <img src="img/photo-1542314831-068cd1dbfeeb.avif" alt="Hotel Pool" />
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="hotel-description">
+              <p id="hotelDetailsDescription">
+                Experience luxury and comfort at our premium hotel. Enjoy
+                stunning views, exceptional service, and world-class amenities
+                that will make your stay unforgettable.
+              </p>
+
+              <h4 class="mt-4 mb-3">Amenities</h4>
+              <div class="hotel-amenities" id="hotelAmenities">
+                <!-- Amenities will be added dynamically -->
+              </div>
+
+              <h4 class="mt-4 mb-3">Location</h4>
+              <p id="hotelLocation">
+                Located in the heart of the city, our hotel offers easy access
+                to major attractions, shopping districts, and business centers.
+              </p>
+
+              <h4 class="mt-4 mb-3">Policies</h4>
+              <ul id="hotelPolicies">
+                <!-- Policies will be added dynamically -->
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="booking-section">
+              <h4 class="mb-3">Book This Hotel</h4>
+              <div class="d-flex justify-content-between mb-3">
+                <span>Price per night:</span>
+                <span class="price-tag" id="hotelDetailsPrice">$120</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <span>Rating:</span>
+                <span class="stars" id="hotelDetailsRating">★★★★★</span>
+              </div>
+
+              <form class="mt-4">
+                <div class="mb-3">
+                  <label class="form-label">Check-in Date</label>
+                  <input
+                    title="check in date"
+                    type="date"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Check-out Date</label>
+                  <input
+                    title="check out date"
+                    type="date"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Rooms</label>
+                  <select title="select rooms" class="form-select" required>
+                    <option value="">Select Rooms</option>
+                    <option>1 Room</option>
+                    <option>2 Rooms</option>
+                    <option>3 Rooms</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Guests</label>
+                  <select title="select guests" class="form-select" required>
+                    <option value="">Select Guests</option>
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-book w-100">
+                  Book Now
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+    // Initialize hotel details
+  </body>
+</html>
