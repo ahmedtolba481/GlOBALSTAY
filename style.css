@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
 :root {
   --primary: #7f4f24;
   --primary-light: #9c6644;
