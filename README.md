@@ -1,6 +1,8 @@
 # 🌍 GlobalStay  
 
-![Image](https://github.com/user-attachments/assets/aeeb2721-223e-4bf0-a27d-cec8077f54de)
+<p align="center">
+  <img src="assets/media/logo.png" alt="GlobalStay Logo" width="400"/>
+</p>
 
 <p align="center">
   <b>✨ Your Gateway to Global Comfort ✨</b>  
