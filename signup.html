@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Globalstay</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="ls.css" />
+  </head>
+  <body class="auth-page">
+    <nav class="navbar navbar-light"">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+            alt="Globalstay"
+          />
+          <span>Globalstay</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container" style="max-width: 620px">
+        <h2 class="section-title">Create your account</h2>
+        <p class="section-subtitle text-center weight-bold">
+          Join Globalstay and book faster
+        </p>
+
+        <div class="contact-form auth-card auth-fade-up">
+          <form id="signupForm" >
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">First name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="First name"
+                  autocomplete="given-name"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Last name"
+                  autocomplete="family-name"
+                  required
+                />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="signupEmail"
+                  name="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signupPassword"
+                  name="password"
+                  placeholder="At least 8 characters"
+                  minlength="8"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Confirm password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Repeat password"
+                  minlength="8"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-check my-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="agree"
+                required
+              />
+              <label class="form-check-label" for="agree">
+                I agree to the Terms and Privacy Policy
+              </label>
+            </div>
+            <button type="submit" class="btn btn-book w-100">
+              Create account
+            </button>
+          </form>
+          <p class="text-center mt-3 mb-0">
+            Already have an account? <a href="login.html">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <script src="signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="signup.js"></script>
+  </body>
+</html>
