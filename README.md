@@ -1,7 +1,7 @@
 # 🌍 GlobalStay  
 
 <p align="center">
-  <img src="media/logo.png" alt="GlobalStay Logo" width="400"/>
+  <img src="assets/media/logo.png" alt="GlobalStay Logo" width="400"/>
 </p>
 
 <p align="center">
@@ -24,30 +24,37 @@ It’s designed with elegance, user-friendliness, and functionality in mind.
 
 ---
 
-## 📂 Project Structure  
+## 📂 Project Structure
+
+```
 /globalstay
-
-│── /media # Images, logos, styles
-
-│── /pages
-
-│ ├── index.html # Landing Page
-
-│ ├── book.html # Booking Page
-
-│ ├── about.html # About Us Page
-
-│ ├── auth.html # Signup & Login Page
-
-│── /css
-
-│ └── style.css # Main stylesheet
-
-│── /js
-
-│ └── main.js # JavaScript functionality
-
-│── README.md # Project documentation
+│
+├── index.html              # Main landing page
+├── README.md               # Project documentation
+├── LICENSE                 # MIT License
+│
+├── /pages/                 # Additional HTML pages
+│   ├── Aboutus.html        # About Us page
+│   ├── booking.html        # Booking page
+│   ├── login.html          # Login page
+│   └── signup.html         # Registration page
+│
+├── /css/                   # Stylesheets
+│   ├── style.css           # Main stylesheet
+│   └── ls.css              # Login/Signup specific styles
+│
+├── /js/                    # JavaScript files
+│   ├── script.js           # Main functionality
+│   ├── login.js            # Login functionality
+│   └── signup.js           # Registration functionality
+│
+└── /assets/                # Static assets
+    ├── /img/               # Images and photos
+    │   ├── *.jpg           # User profile images
+    │   └── *.avif          # Hotel and room images
+    └── /media/             # Media files
+        └── logo.png        # Company logo
+```
 
 ---
 
@@ -60,7 +67,7 @@ It’s designed with elegance, user-friendliness, and functionality in mind.
 
 ## 📸 Logo Preview  
 <p align="center">
-  <img src="media/logo.png" alt="GlobalStay Logo" width="200"/>
+  <img src="assets/media/logo.png" alt="GlobalStay Logo" width="400"/>
 </p>
 
 ---
