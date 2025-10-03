@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="41382617-30f6-41c7-9c0e-432946c5da0c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Aboutus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/22.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/32.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/33.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/44.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/65.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1520250497591-112f2f40a3f4.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1522798514-97ceb8c4f1c8.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1542314831-068cd1dbfeeb.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1551882547-ff40c63fe5fa.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1564501049412-61c2a3083791 (1).avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1564501049412-61c2a3083791.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1566073771259-6a8506099945.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1566665797739-1674de7a421a.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/photo-1611892440504-42a792e24d32.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ls.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/signup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/signup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Eyad-Sharkawy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ahmedtolba481/GlOBALSTAY&quot;,
+    &quot;accountId&quot;: &quot;cb397dbc-d835-46a7-887d-2b76ad848e6d&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="33ZAo9PaWlKXtD7BUEUZqkSy3W9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.222" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="41382617-30f6-41c7-9c0e-432946c5da0c" name="Changes" comment="" />
+      <created>1759514393252</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759514393252</updated>
+      <workItem from="1759514394680" duration="896000" />
+      <workItem from="1759515317113" duration="2006000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
