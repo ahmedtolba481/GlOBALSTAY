@@ -1,9 +1,7 @@
-
 document.getElementById("togglePassword").addEventListener("click", function () {
   const passwordField = document.getElementById("loginPassword");
   const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
   passwordField.setAttribute("type", type);
-
   this.textContent = type === "password" ? "show" : "hide";
 });
 
@@ -22,22 +20,37 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
 
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
+  const rememberMe = document.getElementById("rememberMe").checked;
 
   const storedEmail = localStorage.getItem("userEmail");
   const storedPassword = localStorage.getItem("userPassword");
+  const storedFirstName = localStorage.getItem("userFirstName");
+  const storedLastName = localStorage.getItem("userLastName");
 
   if (!storedEmail || !storedPassword) {
-    showMessage("warning", " No account found. Please <a href='signup.html'>create one</a> first.");
+    showMessage("warning", "No account found. Please <a href='signup.html'>create one</a> first.");
     return;
   }
 
   if (email === storedEmail && password === storedPassword) {
-    showMessage("success", " Login successful! Redirecting...");
+    // Set login session
+    sessionStorage.setItem("isLoggedIn", "true");
+    sessionStorage.setItem("userFirstName", storedFirstName);
+    sessionStorage.setItem("userLastName", storedLastName);
+    sessionStorage.setItem("userEmail", storedEmail);
+    
+    // If remember me is checked, also store in localStorage
+    if (rememberMe) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("rememberMe", "true");
+    }
+
+    showMessage("success", "Login successful! Redirecting...");
     setTimeout(() => {
       window.location.href = "booking.html";
     }, 1500);
   } else {
-    showMessage("danger", " Incorrect email or password.");
+    showMessage("danger", "Incorrect email or password.");
   }
 });
 
@@ -57,6 +70,6 @@ document.getElementById("forgotPasswordLink").addEventListener("click", function
     document.querySelector("#forgotModal p").textContent = 
       `A password reset link has been sent to ${email}.`;
   } else {
-    showMessage("danger", " No account found with this email. Please <a href='signup.html'>sign up</a>.");
+    showMessage("danger", "No account found with this email. Please <a href='signup.html'>sign up</a>.");
   }
 });
