@@ -408,3 +408,19 @@ window.addEventListener("DOMContentLoaded", function () {
   document.getElementById("checkinDate").value = formatDate(today);
   document.getElementById("checkoutDate").value = formatDate(tomorrow);
 });
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click handlers to all hotel card "Book Now" buttons
+  const hotelCards = document.querySelectorAll('.hotel-card');
+  
+  hotelCards.forEach((card, index) => {
+    const bookBtn = card.querySelector('.btn-book');
+    if (bookBtn) {
+      bookBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Hotel IDs correspond to the order (1-indexed)
+        const hotelId = index + 1;
+        window.location.href = `pages/booking.html?hotel=${hotelId}`;
+      });
+    }
+  });
+});
