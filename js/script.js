@@ -1,6 +1,32 @@
 // Set current year
 document.getElementById("year").textContent = new Date().getFullYear();
 
+document.addEventListener("DOMContentLoaded", function () {
+  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split("T")[0];
+
+  document.getElementById("checkinDate").setAttribute("min", today);
+  document.getElementById("checkoutDate").setAttribute("min", tomorrowStr);
+
+  document.getElementById("checkinDate").value = today;
+  document.getElementById("checkoutDate").value = tomorrowStr;
+
+  document
+    .getElementById("checkinDate")
+    .addEventListener("change", function () {
+      const checkinDate = new Date(this.value);
+      checkinDate.setDate(checkinDate.getDate() + 1);
+      const minCheckOut = checkinDate.toISOString().split("T")[0];
+      document.getElementById("checkoutDate").setAttribute("min", minCheckOut);
+
+      const currentCheckout = document.getElementById("checkoutDate").value;
+      if (currentCheckout && currentCheckout < minCheckOut) {
+        document.getElementById("checkoutDate").value = minCheckOut;
+      }
+    });
+});
 // Navbar scroll effect
 window.addEventListener("scroll", function () {
   if (window.scrollY > 50) {
@@ -394,33 +420,76 @@ function setDestination(city) {
   document.getElementById("destinationInput").value = city;
 }
 
-// Set default dates for search form
-window.addEventListener("DOMContentLoaded", function () {
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+// Check if user is logged in
+function isUserLoggedIn() {
+  return (
+    sessionStorage.getItem("isLoggedIn") === "true" ||
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+}
 
-  // Format dates as YYYY-MM-DD
-  const formatDate = (date) => {
-    return date.toISOString().split("T")[0];
-  };
+// Handle booking navigation based on login status
+function handleBookingNavigation(hotelId = null) {
+  if (isUserLoggedIn()) {
+    // User is logged in, go directly to booking page
+    const url = hotelId
+      ? `pages/booking.html?hotel=${hotelId}`
+      : "pages/booking.html";
+    window.location.href = url;
+  } else {
+    // User is not logged in, redirect to login page
+    window.location.href = "pages/login.html";
+  }
+}
 
-  document.getElementById("checkinDate").value = formatDate(today);
-  document.getElementById("checkoutDate").value = formatDate(tomorrow);
-});
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Add click handlers to all hotel card "Book Now" buttons
-  const hotelCards = document.querySelectorAll('.hotel-card');
-  
+  const hotelCards = document.querySelectorAll(".hotel-card");
+
   hotelCards.forEach((card, index) => {
-    const bookBtn = card.querySelector('.btn-book');
+    const bookBtn = card.querySelector(".btn-book");
     if (bookBtn) {
-      bookBtn.addEventListener('click', function(e) {
+      bookBtn.addEventListener("click", function (e) {
         e.preventDefault();
         // Hotel IDs correspond to the order (1-indexed)
         const hotelId = index + 1;
-        window.location.href = `pages/booking.html?hotel=${hotelId}`;
+        handleBookingNavigation(hotelId);
       });
     }
   });
+
+  // Update "Start Booking" buttons to check login status
+  const startBookingBtn = document.getElementById("startBookingBtn");
+  const navBookNowBtn = document.getElementById("navBookNowBtn");
+  const ctaStartBookingBtn = document.getElementById("ctaStartBookingBtn");
+
+  if (startBookingBtn) {
+    startBookingBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleBookingNavigation();
+    });
+  }
+
+  if (navBookNowBtn) {
+    navBookNowBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleBookingNavigation();
+    });
+  }
+
+  if (ctaStartBookingBtn) {
+    ctaStartBookingBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleBookingNavigation();
+    });
+  }
+
+  // Handle modal booking button
+  const modalBookNowBtn = document.getElementById("modalBookNowBtn");
+  if (modalBookNowBtn) {
+    modalBookNowBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleBookingNavigation();
+    });
+  }
 });

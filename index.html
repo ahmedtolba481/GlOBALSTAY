@@ -76,7 +76,7 @@
               <a class="nav-link" href="pages/Aboutus.html">About</a>
             </li>
             <li class="nav-item ms-2">
-              <a class="btn btn-book" href="pages/login.html">Book Now</a>
+              <a class="btn btn-book" href="#" id="navBookNowBtn">Book Now</a>
             </li>
           </ul>
         </div>
@@ -98,7 +98,7 @@
                 <a href="#hotels" class="btn btn-outline-light me-3 btn-lg"
                   >Browse Hotels</a
                 >
-                <a href="pages/login.html" class="btn btn-book btn-lg""
+                <a href="#" class="btn btn-book btn-lg" id="startBookingBtn"
                   >Start Booking</a
                 >
               </div>
@@ -325,9 +325,7 @@
                     onclick="openHotelDetails('Mediterranean Resort')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -369,9 +367,7 @@
                     onclick="openHotelDetails('Nile View Hotel')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -413,9 +409,7 @@
                     onclick="openHotelDetails('Pharaoh\'s Palace')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -457,9 +451,7 @@
                     onclick="openHotelDetails('Red Sea Resort')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -501,9 +493,7 @@
                     onclick="openHotelDetails('Coral Bay Hotel')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -545,9 +535,7 @@
                     onclick="openHotelDetails('Mediterranean Paradise')"
                     >Details</a
                   >
-                  <a
-                    href="pages/login.html"
-                    class="btn btn-book flex-fill"
+                  <a href="pages/login.html" class="btn btn-book flex-fill"
                     >Book Now</a
                   >
                 </div>
@@ -603,9 +591,7 @@
                         onclick="openHotelDetails('Aswan Grand Hotel')"
                         >Details</a
                       >
-                      <a
-                        href="pages/login.html"
-                        class="btn btn-book flex-fill"
+                      <a href="pages/login.html" class="btn btn-book flex-fill"
                         >Book Now</a
                       >
                     </div>
@@ -647,9 +633,7 @@
                         onclick="openHotelDetails('Pyramids View Hotel')"
                         >Details</a
                       >
-                      <a
-                        href="pages/login.html"
-                        class="btn btn-book flex-fill"
+                      <a href="pages/login.html" class="btn btn-book flex-fill"
                         >Book Now</a
                       >
                     </div>
@@ -691,9 +675,7 @@
                         onclick="openHotelDetails('Valley of Kings Resort')"
                         >Details</a
                       >
-                      <a
-                        href="pages/login.html"
-                        class="btn btn-book flex-fill"
+                      <a href="pages/login.html" class="btn btn-book flex-fill"
                         >Book Now</a
                       >
                     </div>
@@ -1020,7 +1002,7 @@
             Find the best offers and instant confirmation. Start your search now
             for your perfect trip.
           </p>
-          <a href="pages/login.html" class="btn btn-book btn-lg""
+          <a href="#" class="btn btn-book btn-lg" id="ctaStartBookingBtn"
             >Start Booking Now</a
           >
         </div>
@@ -1227,7 +1209,10 @@
             src="assets/img/photo-1520250497591-112f2f40a3f4.avif"
             alt="Hotel View"
           />
-          <img src="assets/img/photo-1542314831-068cd1dbfeeb.avif" alt="Hotel Pool" />
+          <img
+            src="assets/img/photo-1542314831-068cd1dbfeeb.avif"
+            alt="Hotel Pool"
+          />
         </div>
 
         <div class="row">
@@ -1306,7 +1291,11 @@
                     <option>3 Guests</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-book w-100">
+                <button
+                  type="button"
+                  class="btn btn-book w-100"
+                  id="modalBookNowBtn"
+                >
                   Book Now
                 </button>
               </form>
@@ -1320,6 +1309,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/script.js"></script>
-    // Initialize hotel details
   </body>
 </html>
