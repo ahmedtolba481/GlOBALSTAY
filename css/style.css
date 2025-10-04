@@ -846,7 +846,32 @@ footer a:hover {
   transform: translateY(-2px);
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE DESIGN */
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .hotel-card {
+    margin-bottom: 2rem;
+  }
+
+  .search-card {
+    padding: 2rem;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
@@ -997,6 +1022,38 @@ footer a:hover {
   .gallery-main {
     grid-row: auto;
     height: 250px;
+  }
+}
+
+/* Browse Hotels Button Responsive Styles */
+@media (max-width: 768px) {
+  .btn-outline-light {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-outline-light {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-outline-light {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.8rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn-outline-light {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
   }
 }
 
