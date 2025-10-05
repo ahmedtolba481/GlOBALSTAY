@@ -1,31 +1,31 @@
 // Authentication Check and User Display
 // Add this script to booking.html and any other pages that require login
 
-(function() {
-  // Check if user is logged in
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn") || localStorage.getItem("isLoggedIn");
-  const rememberMe = localStorage.getItem("rememberMe");
+const API_BASE = 'http://localhost:4000/api';
 
-  if (!isLoggedIn) {
-    // Not logged in, redirect to login page
+(function() {
+  const token = sessionStorage.getItem('token') || localStorage.getItem('token');
+  if (!token) {
     window.location.href = "login.html";
     return;
   }
 
-  // If remember me was checked, restore session from localStorage
-  if (rememberMe === "true" && !sessionStorage.getItem("isLoggedIn")) {
-    sessionStorage.setItem("isLoggedIn", "true");
-    sessionStorage.setItem("userFirstName", localStorage.getItem("userFirstName"));
-    sessionStorage.setItem("userLastName", localStorage.getItem("userLastName"));
-    sessionStorage.setItem("userEmail", localStorage.getItem("userEmail"));
-  }
-
-  // Get user info
-  const firstName = sessionStorage.getItem("userFirstName");
-  const lastName = sessionStorage.getItem("userLastName");
-
-  // Update navbar to show user name
-  updateNavbar(firstName, lastName);
+  fetch(`${API_BASE}/auth/me`, { headers: { Authorization: `Bearer ${token}` } })
+    .then(async (res) => {
+      if (!res.ok) throw new Error('unauthorized');
+      const { user } = await res.json();
+      sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('userFirstName', user.firstName);
+      sessionStorage.setItem('userLastName', user.lastName);
+      sessionStorage.setItem('userEmail', user.email);
+      updateNavbar(user.firstName, user.lastName);
+    })
+    .catch(() => {
+      sessionStorage.clear();
+      localStorage.removeItem('token');
+      localStorage.removeItem('isLoggedIn');
+      window.location.href = "login.html";
+    });
 })();
 
 function updateNavbar(firstName, lastName) {
@@ -62,18 +62,10 @@ function updateNavbar(firstName, lastName) {
 
 // Logout function
 function logout() {
-  // Clear session
   sessionStorage.clear();
-  
-  // If remember me is not checked, clear localStorage login data
-  if (localStorage.getItem("rememberMe") !== "true") {
-    localStorage.removeItem("isLoggedIn");
-  }
-  
-  // Clear remember me flag
-  localStorage.removeItem("rememberMe");
-  
-  // Redirect to home page
+  localStorage.removeItem('token');
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('rememberMe');
   window.location.href = "../index.html";
 }
 

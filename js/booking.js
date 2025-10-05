@@ -418,6 +418,8 @@ function calculateTotal() {
   `;
 }
 
+const API_BASE = 'http://localhost:4000/api';
+
 // Handle booking form submission
 function handleBookingSubmit(e) {
   e.preventDefault();
@@ -466,10 +468,37 @@ function handleBookingSubmit(e) {
     timestamp: new Date().toISOString(),
   };
 
-  // Store booking (in real app, this would be sent to server)
-  const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-  bookings.push(booking);
-  localStorage.setItem("bookings", JSON.stringify(bookings));
+  const token = sessionStorage.getItem('token') || localStorage.getItem('token');
+  if (!token) {
+    alert('Please login first.');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  fetch(`${API_BASE}/bookings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(booking)
+  })
+    .then(async (res) => {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to create booking');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      document.getElementById("bookingRef").textContent = data.booking.reference;
+      const modal = new bootstrap.Modal(document.getElementById("successModal"));
+      modal.show();
+      document.getElementById("bookingForm").reset();
+    })
+    .catch((err) => {
+      alert(err.message || 'Error creating booking');
+    });
 
   // Show success modal
   document.getElementById("bookingRef").textContent = booking.reference;
@@ -480,15 +509,8 @@ function handleBookingSubmit(e) {
   document.getElementById("bookingForm").reset();
 }
 
-// Generate booking reference
-function generateBookingReference() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let reference = "GS-";
-  for (let i = 0; i < 8; i++) {
-    reference += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return reference;
-}
+// Reference is generated server-side now
+function generateBookingReference() { return 'pending'; }
 
 // Make selectHotel available globally
 window.selectHotel = selectHotel;

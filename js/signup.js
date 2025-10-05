@@ -1,3 +1,5 @@
+const API_BASE = 'http://localhost:4000/api';
+
 function showMessage(type, message) {
   const messageContainer = document.getElementById("messageContainer");
   messageContainer.innerHTML = `
@@ -23,21 +25,24 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
     return;
   }
 
-  // Check if email already exists
-  const existingEmail = localStorage.getItem("userEmail");
-  if (existingEmail === email) {
-    showMessage("warning", "⚠️ This email is already registered. Please <a href='login.html'>login</a> instead.");
-    return;
-  }
-
-  // Store user data
-  localStorage.setItem("userFirstName", firstName);
-  localStorage.setItem("userLastName", lastName);
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userPassword", password);
-
-  showMessage("success", "✅ Signup successful! Redirecting to login...");
-  setTimeout(() => {
-    window.location.href = "login.html";
-  }, 1500);
+  // Send signup to backend
+  fetch(`${API_BASE}/auth/signup`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ firstName, lastName, email, password })
+  })
+    .then(async (res) => {
+      if (res.status === 201) {
+        showMessage("success", "✅ Signup successful! Redirecting to login...");
+        setTimeout(() => { window.location.href = "login.html"; }, 1500);
+      } else if (res.status === 409) {
+        showMessage("warning", "⚠️ This email is already registered. Please <a href='login.html'>login</a> instead.");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        showMessage("danger", data.error || "❌ Signup failed. Please try again.");
+      }
+    })
+    .catch(() => {
+      showMessage("danger", "❌ Network error. Please try again.");
+    });
 });
