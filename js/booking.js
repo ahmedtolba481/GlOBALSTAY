@@ -445,49 +445,49 @@ function handleBookingSubmit(e) {
     return;
   }
 
-  // Create booking object
-  const booking = {
-    reference: generateBookingReference(),
-    hotel: selectedHotel,
-    guest: {
-      firstName,
-      lastName,
-      email,
-      phone,
-    },
-    dates: {
-      checkIn,
-      checkOut,
-      nights,
-    },
-    numGuests,
-    roomType,
-    specialRequests,
-    timestamp: new Date().toISOString(),
+  // Calculate room price
+  let roomMultiplier = 1;
+  switch (roomType) {
+    case "deluxe":
+      roomMultiplier = 1.3;
+      break;
+    case "suite":
+      roomMultiplier = 1.6;
+      break;
+    case "presidential":
+      roomMultiplier = 2.5;
+      break;
+  }
+
+  // Create booking data object
+  const bookingData = {
+    hotelName: selectedHotel.name,
+    hotelImage: selectedHotel.image,
+    hotelLocation: selectedHotel.location,
+    hotelPrice: selectedHotel.price,
+    guestFirstName: firstName,
+    guestLastName: lastName,
+    guestEmail: email,
+    guestPhone: phone,
+    checkInDate: checkIn,
+    checkOutDate: checkOut,
+    numGuests: numGuests,
+    roomType: roomType,
+    specialRequests: specialRequests,
+    nights: nights,
+    roomPrices: {
+      standard: selectedHotel.price,
+      deluxe: selectedHotel.price * 1.3,
+      suite: selectedHotel.price * 1.6,
+      presidential: selectedHotel.price * 2.5
+    }
   };
 
-  // Store booking (in real app, this would be sent to server)
-  const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-  bookings.push(booking);
-  localStorage.setItem("bookings", JSON.stringify(bookings));
+  // Save booking data to sessionStorage
+  sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
 
-  // Show success modal
-  document.getElementById("bookingRef").textContent = booking.reference;
-  const modal = new bootstrap.Modal(document.getElementById("successModal"));
-  modal.show();
-
-  // Reset form
-  document.getElementById("bookingForm").reset();
-}
-
-// Generate booking reference
-function generateBookingReference() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let reference = "GS-";
-  for (let i = 0; i < 8; i++) {
-    reference += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return reference;
+  // Redirect to payment page
+  window.location.href = 'pay.html';
 }
 
 // Make selectHotel available globally
