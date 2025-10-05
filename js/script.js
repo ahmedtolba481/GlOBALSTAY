@@ -493,3 +493,48 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const viewAllBtn = document.querySelector('.view-all-btn');
+  const additionalHotels = document.getElementById('additionalHotels');
+  
+  if (viewAllBtn && additionalHotels) {
+    // Hide button immediately when clicked
+    viewAllBtn.addEventListener('click', function() {
+      viewAllBtn.style.display = 'none';
+    });
+    
+    // Listen for when the collapse is shown
+    additionalHotels.addEventListener('shown.bs.collapse', function () {
+      // Button is already hidden from the click event
+      
+      // Create a "Show Less" button at the bottom of additional hotels
+      const btnContainer = document.createElement('div');
+      btnContainer.className = 'mt-4 text-center';
+      btnContainer.id = 'showLessContainer';
+      
+      const showLessBtn = document.createElement('button');
+      showLessBtn.className = 'btn btn-outline-primary btn-lg w-100';
+      showLessBtn.textContent = 'Show Less';
+      showLessBtn.onclick = function() {
+        // Collapse the additional hotels
+        const bsCollapse = new bootstrap.Collapse(additionalHotels, {
+          toggle: false
+        });
+        bsCollapse.hide();
+        
+        // Show the original "View All Hotels" button
+        viewAllBtn.style.display = 'block';
+        
+        // Remove the "Show Less" button
+        btnContainer.remove();
+        
+        // Scroll back to the hotels section
+        document.getElementById('hotels').scrollIntoView({ behavior: 'smooth' });
+      };
+      
+      btnContainer.appendChild(showLessBtn);
+      additionalHotels.appendChild(btnContainer);
+    });
+  }
+});

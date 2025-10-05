@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment - Globalstay</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/booking.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../index.html">
+          <img
+            src="../assets/img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+            alt="Globalstay"
+          />
+          <span>Globalstay</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Payment Header -->
+    <section class="booking-header">
+      <div class="container">
+        <h1 class="booking-title">Complete Your Payment</h1>
+        <p class="booking-subtitle">Secure payment processing</p>
+      </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="booking-card">
+              <h2 class="section-title mb-4">Payment Details</h2>
+              <form id="paymentForm">
+                <div class="mb-4">
+                  <label class="form-label">Payment Method</label>
+                  <div class="payment-methods">
+                    <div class="form-check payment-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="creditCard"
+                        value="credit"
+                        checked
+                      />
+                      <label class="form-check-label" for="creditCard">
+                        <i class="fas fa-credit-card me-2"></i>Credit/Debit Card
+                      </label>
+                    </div>
+                    <div class="form-check payment-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="paypal"
+                        value="paypal"
+                      />
+                      <label class="form-check-label" for="paypal">
+                        <i class="fab fa-paypal me-2"></i>PayPal
+                      </label>
+                    </div>
+                    <div class="form-check payment-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="vodafoneCash"
+                        value="vodafone"
+                      />
+                      <label class="form-check-label" for="vodafoneCash">
+                        <i class="fas fa-mobile-alt me-2"></i>Vodafone Cash
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="cardDetails">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label class="form-label">Cardholder Name *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cardName"
+                        placeholder="Name on card"
+                        required
+                      />
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Card Number *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        maxlength="19"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Expiry Date *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="expiryDate"
+                        placeholder="MM/YY"
+                        maxlength="5"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">CVV *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cvv"
+                        placeholder="123"
+                        maxlength="4"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-check mt-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="agreeTerms"
+                    required
+                  />
+                  <label class="form-check-label" for="agreeTerms">
+                    I agree to the terms and conditions and cancellation policy
+                  </label>
+                </div>
+
+                <div class="booking-actions">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="window.history.back()"
+                  >
+                    <i class="fas fa-arrow-left me-2"></i>Back
+                  </button>
+                  <button type="submit" class="btn btn-book">
+                    Confirm Booking<i class="fas fa-lock ms-2"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="booking-summary">
+              <h3>Booking Summary</h3>
+              <div id="paymentSummary"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center p-5">
+            <div class="success-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="mt-4 mb-3">Booking Confirmed!</h3>
+            <p class="mb-4">
+              Your reservation has been successfully confirmed. A confirmation
+              email has been sent to your email address.
+            </p>
+            <div class="booking-reference">
+              <strong>Booking Reference:</strong>
+              <span id="bookingRef"></span>
+            </div>
+            <button
+              class="btn btn-book mt-4"
+              onclick="window.location.href='../index.html'"
+            >
+              Return to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="footer-brand">
+              <img
+                src="../assets/img/WhatsApp Image 2025-10-02 at 13.06.05_34ae7f81.jpg"
+                alt="Globalstay"
+              />
+              <span class="footer-brand-text">Globalstay</span>
+            </div>
+            <p>Your trusted partner for finding the perfect accommodation anywhere in the world.</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <p class="mb-0">© <span id="year"></span> Globalstay. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/pay.js"></script>
+  </body>
+</html>
