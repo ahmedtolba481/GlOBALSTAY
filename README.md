@@ -1,5 +1,25 @@
 # 🌍 GlobalStay  
 
+# Backend server
+
+Run a Node.js Express server with MongoDB:
+
+1. Create a `.env` file at the project root with:
+
+```
+PORT=4000
+MONGODB_URI=mongodb://127.0.0.1:27017/hotelapp
+JWT_SECRET=change-me
+```
+
+2. Start the server:
+
+```
+npm run dev
+```
+
+API base URL: `http://localhost:4000`
+
 <p align="center">
   <img src="assets/media/logo.png" alt="GlobalStay Logo" width="400"/>
 </p>

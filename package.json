@@ -1,0 +1,34 @@
+{
+  "name": "hotel-main",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"assets/media/logo.png\" alt=\"GlobalStay Logo\" width=\"400\"/>\r </p>",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedtolba481/GlOBALSTAY.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ahmedtolba481/GlOBALSTAY/issues"
+  },
+  "homepage": "https://github.com/ahmedtolba481/GlOBALSTAY#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
