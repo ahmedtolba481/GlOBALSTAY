@@ -145,13 +145,25 @@ body {
   box-shadow: var(--shadow);
   border-radius: 12px;
   padding: 0.5rem 0;
-  margin-top: 0.5rem;
+  margin-top: 0;
   min-width: 180px;
   position: absolute;
   right: 0;
   top: calc(100% + 10px);
   z-index: 9999;
   transform: none;
+}
+
+/* Ensure navbar dropdown overlays and never increases navbar height on small screens */
+@media (max-width: 1199.98px) {
+  .navbar .dropdown-menu {
+    position: fixed;
+    right: 12px;
+    top: 70px; /* approx navbar height */
+    left: auto;
+    bottom: auto;
+    width: auto;
+  }
 }
 
 /* Ensure navbar doesn't clip the dropdown */

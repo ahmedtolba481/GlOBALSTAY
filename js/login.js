@@ -61,6 +61,16 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       if (rememberMe) {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("rememberMe", "true");
+        // Persist core user identity so name/email survive reloads
+        if (authResult.user && authResult.user.email) {
+          localStorage.setItem("userEmail", authResult.user.email);
+        }
+        if (authResult.user && authResult.user.firstName) {
+          localStorage.setItem("userFirstName", authResult.user.firstName);
+        }
+        if (authResult.user && authResult.user.lastName) {
+          localStorage.setItem("userLastName", authResult.user.lastName);
+        }
       }
 
       showMessage("success", "Login successful! Redirecting...");

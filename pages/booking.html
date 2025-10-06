@@ -55,6 +55,17 @@
               <form id="bookingForm">
                 <div class="row g-3">
                   <div class="col-md-6">
+                    <label class="form-label">Booking Reference</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="bookingReference"
+                      value=""
+                      readonly
+                    />
+                    <small class="text-muted">Keep this reference for support and changes.</small>
+                  </div>
+                  <div class="col-md-6">
                     <label class="form-label">First Name *</label>
                     <input
                       type="text"
@@ -91,6 +102,16 @@
                     />
                   </div>
                   <div class="col-md-6">
+                    <label class="form-label">Room Type *</label>
+                    <select class="form-select" id="roomType" required>
+                      <option value="">Select...</option>
+                      <option value="standard">Standard Room</option>
+                      <option value="deluxe">Deluxe Room</option>
+                      <option value="suite">Suite</option>
+                      <option value="presidential">Presidential Suite</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
                     <label class="form-label">Check-in Date *</label>
                     <input
                       type="date"
@@ -119,16 +140,7 @@
                       <option value="5">5+ Guests</option>
                     </select>
                   </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Room Type *</label>
-                    <select class="form-select" id="roomType" required>
-                      <option value="">Select...</option>
-                      <option value="standard">Standard Room</option>
-                      <option value="deluxe">Deluxe Room</option>
-                      <option value="suite">Suite</option>
-                      <option value="presidential">Presidential Suite</option>
-                    </select>
-                  </div>
+                  
                   <div class="col-12">
                     <label class="form-label">Special Requests</label>
                     <textarea
@@ -179,9 +191,9 @@
             </div>
             <button
               class="btn btn-book mt-4"
-              onclick="window.location.href='../index.html'"
+              onclick="window.location.href='my-bookings.html'"
             >
-              Return to Home
+              Go to My Bookings
             </button>
           </div>
         </div>
@@ -235,5 +247,67 @@
     <script src="../js/navbar.js"></script>
     <script src="../js/auth-check.js"></script>
     <script src="../js/booking.js"></script>
+    
+    <!-- Pre-fill form with user data -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Generate and display a booking reference on load
+        try {
+          if (typeof generateBookingReference === 'function') {
+            const refInput = document.getElementById('bookingReference');
+            if (refInput && !refInput.value) {
+              refInput.value = generateBookingReference();
+            }
+          }
+        } catch (e) {}
+
+        // Try to get current user data and pre-fill the form
+        try {
+          if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+            const userData = AuthUtils.getCurrentUserData();
+            if (userData) {
+              // Pre-fill form fields with user data
+              const firstNameField = document.getElementById('guestFirstName');
+              const lastNameField = document.getElementById('guestLastName');
+              const emailField = document.getElementById('guestEmail');
+              
+              if (firstNameField && userData.firstName) {
+                firstNameField.value = userData.firstName;
+              }
+              if (lastNameField && userData.lastName) {
+                lastNameField.value = userData.lastName;
+              }
+              if (emailField && userData.email) {
+                emailField.value = userData.email;
+              }
+            }
+          }
+        } catch (error) {
+          console.log('Could not pre-fill form with user data:', error);
+        }
+        
+        // Fallback to sessionStorage/localStorage
+        if (!document.getElementById('guestFirstName').value) {
+          const firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName');
+          if (firstName) {
+            document.getElementById('guestFirstName').value = firstName;
+          }
+        }
+        
+        if (!document.getElementById('guestLastName').value) {
+          const lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName');
+          if (lastName) {
+            document.getElementById('guestLastName').value = lastName;
+          }
+        }
+        
+        if (!document.getElementById('guestEmail').value) {
+          const email = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
+          if (email) {
+            document.getElementById('guestEmail').value = email;
+          }
+        }
+      });
+    </script>
   </body>
 </html>

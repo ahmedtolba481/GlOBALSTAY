@@ -248,6 +248,11 @@ document.getElementById('paymentForm').addEventListener('submit', function(e) {
 
   // Clear booking data
   sessionStorage.removeItem('bookingData');
+
+  // Redirect to My Bookings page after showing success
+  setTimeout(() => {
+    window.location.href = 'my-bookings.html';
+  }, 1500);
 });
 
 // Initialize on page load

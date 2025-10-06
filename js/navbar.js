@@ -12,6 +12,7 @@ class NavbarComponent {
     const path = window.location.pathname;
     if (path.includes('Aboutus.html')) return 'about';
     if (path.includes('booking.html')) return 'booking';
+    if (path.includes('my-bookings.html')) return 'my-bookings';
     if (path.includes('profile.html')) return 'profile';
     if (path.includes('login.html')) return 'login';
     if (path.includes('signup.html')) return 'signup';
@@ -35,20 +36,27 @@ class NavbarComponent {
             <span>Globalstay</span>
           </a>
 
-          <button
-            title="toggle nav"
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <!-- Profile + Burger grouped on the right for < 1200px -->
+          <div class="d-flex ms-auto align-items-center d-xl-none">
+            <ul class="navbar-nav align-items-center">
+              ${this.generateAuthItems(true)}
+            </ul>
+            <button
+              title="toggle nav"
+              class="navbar-toggler ms-2"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
 
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
               ${this.generateNavItems()}
-              ${this.generateAuthItems()}
+              <!-- Auth items INSIDE the menu only for >= 1200px -->
+              <span class="d-none d-xl-inline">${this.generateAuthItems(false)}</span>
             </ul>
           </div>
         </div>
@@ -86,14 +94,14 @@ class NavbarComponent {
     `).join('');
   }
 
-  generateAuthItems() {
+  generateAuthItems(isOutside = false) {
     if (this.currentPage === 'login' || this.currentPage === 'signup') {
       return ''; // No auth items on login/signup pages
     }
 
     if (this.currentPage === 'profile') {
       return `
-        <li class="nav-item ms-2 d-flex align-items-center">
+        <li class="nav-item ms-2 d-flex align-items-center ${isOutside ? 'd-xl-none' : ''}">
           <div class="profile-icon-container me-3" id="navbarProfileIconContainer" style="width: 32px; height: 32px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary);">
             <img id="navbarProfileIconImage" src="" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: none;">
             <i id="navbarProfileIconFallback" class="fas fa-user" style="color: white; font-size: 16px;"></i>
@@ -106,27 +114,37 @@ class NavbarComponent {
       `;
     }
 
+    const signInId = isOutside ? 'signInItemOutside' : 'signInItem';
+    const profileItemId = isOutside ? 'profileItemOutside' : 'profileItem';
+    const dropdownId = isOutside ? 'profileDropdownOutside' : 'profileDropdown';
+    const iconContainerId = isOutside ? 'profileIconContainerOutside' : 'profileIconContainer';
+    const iconImageId = isOutside ? 'profileIconImageOutside' : 'profileIconImage';
+    const iconFallbackId = isOutside ? 'profileIconFallbackOutside' : 'navbarProfileIconFallback';
+    const userNameDisplayId = isOutside ? 'userNameDisplayOutside' : 'userNameDisplay';
+    const visibilityClass = isOutside ? 'd-xl-none' : '';
+
     return `
-      <li class="nav-item ms-2">
+      <li class="nav-item ms-2 ${visibilityClass}" id="${signInId}" style="display: none;">
         <a class="btn btn-book" href="${this.getRelativePath()}pages/booking.html">Book Now</a>
       </li>
       <!-- Sign In Button (shown when logged out) -->
-      <li class="nav-item ms-2" id="signInItem" style="display: none;">
-        <a class="btn btn-book" href="${this.getRelativePath()}pages/login.html">Sign In</a>
+      <li class="nav-item ms-2 ${visibilityClass}" id="${signInId}_login" style="display: none;">
+        <a class="btn btn-outline-dark" href="${this.getRelativePath()}pages/login.html"><i class="fas fa-sign-in-alt me-1"></i>Sign In</a>
       </li>
       
       <!-- Profile Dropdown (shown when logged in) -->
-      <li class="nav-item dropdown ms-2" id="profileItem" style="display: none;">
-        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <div class="profile-icon-container" id="profileIconContainer" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary); position: relative;">
-            <img id="profileIconImage" src="" alt="Profile" style="width: 18px; height: 18px; object-fit: cover; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;">
-            <i id="navbarProfileIconFallback" class="fas fa-user" style="color: white; font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"></i>
+      <li class="nav-item dropdown ms-2 ${visibilityClass}" id="${profileItemId}" style="display: none;">
+        <a class="nav-link dropdown-toggle" href="#" id="${dropdownId}" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-container="body">
+          <div class="profile-icon-container" id="${iconContainerId}" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary); position: relative;">
+            <img id="${iconImageId}" src="" alt="Profile" style="width: 18px; height: 18px; object-fit: cover; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;">
+            <i id="${iconFallbackId}" class="fas fa-user" style="color: white; font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"></i>
           </div>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-          <li><div class="dropdown-header" id="userNameDisplay">Loading...</div></li>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="${dropdownId}">
+          <li><div class="dropdown-header" id="${userNameDisplayId}">Loading...</div></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="${this.getRelativePath()}pages/profile.html"><i class="fas fa-user me-2"></i>View Profile</a></li>
+          <li><a class="dropdown-item" href="${this.getRelativePath()}pages/my-bookings.html"><i class="fas fa-calendar me-2"></i>My Bookings</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
         </ul>
@@ -136,8 +154,12 @@ class NavbarComponent {
 
   // Load user name in dropdown
   loadUserName() {
-    const userNameDisplay = document.getElementById('userNameDisplay') || document.getElementById('profileUserName');
-    if (!userNameDisplay) return;
+    const candidates = [
+      document.getElementById('userNameDisplay'),
+      document.getElementById('userNameDisplayOutside'),
+      document.getElementById('profileUserName')
+    ].filter(Boolean);
+    if (candidates.length === 0) return;
 
     let firstName = '';
     let lastName = '';
@@ -146,13 +168,14 @@ class NavbarComponent {
     try {
       if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
         const userData = AuthUtils.getCurrentUserData();
+        console.log('loadUserName - userData from AuthUtils:', userData);
         if (userData) {
           firstName = userData.firstName || '';
           lastName = userData.lastName || '';
         }
       }
     } catch (error) {
-      console.log('AuthUtils not available, using fallback');
+      console.log('AuthUtils not available, using fallback:', error);
     }
 
     // Fallback to sessionStorage/localStorage
@@ -163,54 +186,57 @@ class NavbarComponent {
       lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName') || '';
     }
 
+    console.log('loadUserName - final firstName:', firstName);
+    console.log('loadUserName - final lastName:', lastName);
+
+    // Normalize to avoid showing literal "null" or "undefined"
+    const safeFirst = (firstName === null || firstName === undefined || firstName === 'null' || firstName === 'undefined') ? '' : firstName;
+    const safeLast = (lastName === null || lastName === undefined || lastName === 'null' || lastName === 'undefined') ? '' : lastName;
+
     // Display full name
-    if (firstName && lastName) {
-      userNameDisplay.textContent = `${firstName} ${lastName}`;
-    } else if (firstName) {
-      userNameDisplay.textContent = firstName;
-    } else {
-      userNameDisplay.textContent = 'User';
-    }
+    const finalText = safeFirst && safeLast ? `${safeFirst} ${safeLast}` : (safeFirst || 'User');
+    candidates.forEach(el => (el.textContent = finalText));
   }
 
   // Load profile icon
   loadProfileIcon() {
-    const profileIconImage = document.getElementById('profileIconImage') || document.getElementById('navbarProfileIconImage');
-    const profileIconFallback = document.getElementById('profileIconFallback') || document.getElementById('navbarProfileIconFallback');
-    
-    if (!profileIconImage || !profileIconFallback) return;
+    const imageIds = ['profileIconImage', 'navbarProfileIconImage', 'profileIconImageOutside'];
+    const fallbackIds = ['profileIconFallback', 'navbarProfileIconFallback', 'profileIconFallbackOutside'];
+    const images = imageIds.map(id => document.getElementById(id)).filter(Boolean);
+    const fallbacks = fallbackIds.map(id => document.getElementById(id)).filter(Boolean);
 
-    // Check for saved profile picture
+    if (images.length === 0 && fallbacks.length === 0) return;
+
     const savedPicture = localStorage.getItem('profilePicture');
     const savedIcon = localStorage.getItem('profilePictureIcon');
-    
+
     if (savedPicture) {
-      // Show uploaded image with correct sizing
-      profileIconImage.src = savedPicture;
-      profileIconImage.style.display = 'block';
-      profileIconImage.style.width = '18px';
-      profileIconImage.style.height = '18px';
-      profileIconImage.style.objectFit = 'cover';
-      profileIconImage.style.position = 'absolute';
-      profileIconImage.style.top = '50%';
-      profileIconImage.style.left = '50%';
-      profileIconImage.style.transform = 'translate(-50%, -50%)';
-      profileIconImage.style.borderRadius = '50%';
-      profileIconFallback.style.display = 'none';
+      images.forEach(img => {
+        img.src = savedPicture;
+        img.style.display = 'block';
+        img.style.width = '18px';
+        img.style.height = '18px';
+        img.style.objectFit = 'cover';
+        img.style.position = 'absolute';
+        img.style.top = '50%';
+        img.style.left = '50%';
+        img.style.transform = 'translate(-50%, -50%)';
+        img.style.borderRadius = '50%';
+      });
+      fallbacks.forEach(fb => (fb.style.display = 'none'));
     } else if (savedIcon) {
-      // Show preset icon - create a new icon element
-      const newIcon = document.createElement('i');
-      newIcon.className = savedIcon;
-      newIcon.style.color = 'white';
-      newIcon.style.fontSize = profileIconFallback.style.fontSize || '20px';
-      
-      // Replace the fallback icon
-      profileIconFallback.parentNode.replaceChild(newIcon, profileIconFallback);
-      newIcon.id = profileIconFallback.id;
+      fallbacks.forEach(fb => {
+        const newIcon = document.createElement('i');
+        newIcon.className = savedIcon;
+        newIcon.style.color = 'white';
+        newIcon.style.fontSize = fb.style.fontSize || '20px';
+        fb.parentNode.replaceChild(newIcon, fb);
+        newIcon.id = fb.id;
+      });
+      images.forEach(img => (img.style.display = 'none'));
     } else {
-      // Show default user icon
-      profileIconImage.style.display = 'none';
-      profileIconFallback.style.display = 'block';
+      images.forEach(img => (img.style.display = 'none'));
+      fallbacks.forEach(fb => (fb.style.display = 'block'));
     }
   }
 
@@ -223,18 +249,30 @@ class NavbarComponent {
     }
 
     const signInItem = document.getElementById('signInItem');
+    const signInItemLogin = document.getElementById('signInItem_login');
+    const signInItemOutside = document.getElementById('signInItemOutside');
+    const signInItemOutsideLogin = document.getElementById('signInItemOutside_login');
     const profileItem = document.getElementById('profileItem');
+    const profileItemOutside = document.getElementById('profileItemOutside');
 
     if (this.isLoggedIn) {
       // User is logged in - show profile dropdown
       if (signInItem) signInItem.style.display = 'none';
+      if (signInItemLogin) signInItemLogin.style.display = 'none';
+      if (signInItemOutside) signInItemOutside.style.display = 'none';
+      if (signInItemOutsideLogin) signInItemOutsideLogin.style.display = 'none';
       if (profileItem) profileItem.style.display = 'block';
+      if (profileItemOutside) profileItemOutside.style.display = 'block';
       this.loadUserName();
       this.loadProfileIcon();
     } else {
       // User is not logged in - show sign in button
       if (signInItem) signInItem.style.display = 'block';
+      if (signInItemLogin) signInItemLogin.style.display = 'block';
+      if (signInItemOutside) signInItemOutside.style.display = 'block';
+      if (signInItemOutsideLogin) signInItemOutsideLogin.style.display = 'block';
       if (profileItem) profileItem.style.display = 'none';
+      if (profileItemOutside) profileItemOutside.style.display = 'none';
     }
   }
 

@@ -166,10 +166,23 @@
               <div
                 class="d-flex justify-content-between align-items-center mb-3"
               >
-                <h5 class="mb-0">My Bookings</h5>
-                <a href="booking.html" class="btn btn-book">New Booking</a>
+                <h5 class="mb-0">Quick Actions</h5>
+                <a href="my-bookings.html" class="btn btn-outline-primary">
+                  <i class="fas fa-calendar me-2"></i>View My Bookings
+                </a>
               </div>
-              <div id="bookingsList"></div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <a href="booking.html" class="btn btn-book w-100">
+                    <i class="fas fa-plus me-2"></i>New Booking
+                  </a>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <a href="my-bookings.html" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-list me-2"></i>Manage Bookings
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -571,14 +584,16 @@
         const profileName = document.getElementById('profileName');
         const profileEmail = document.getElementById('profileEmail');
         
-        // Set profile information
+        // Set profile information (avoid literal null/undefined)
         if (profileName) {
+          const safeFirst = (firstName === null || firstName === undefined || firstName === 'null' || firstName === 'undefined') ? '' : firstName;
+          const safeLast = (lastName === null || lastName === undefined || lastName === 'null' || lastName === 'undefined') ? '' : lastName;
           let fullName = '';
           
-          if (firstName && lastName) {
-            fullName = firstName + ' ' + lastName;
-          } else if (firstName) {
-            fullName = firstName;
+          if (safeFirst && safeLast) {
+            fullName = safeFirst + ' ' + safeLast;
+          } else if (safeFirst) {
+            fullName = safeFirst;
           } else {
             fullName = 'Guest User';
           }

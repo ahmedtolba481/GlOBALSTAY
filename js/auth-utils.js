@@ -202,9 +202,35 @@ class AuthUtils {
   // Get current logged-in user data
   static getCurrentUserData() {
     const userEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
+    console.log('getCurrentUserData - userEmail:', userEmail);
+    
     if (!userEmail) return null;
     
-    return this.getUserData(userEmail);
+    // First try to get from the users object
+    const userData = this.getUserData(userEmail);
+    console.log('getCurrentUserData - userData from users object:', userData);
+    
+    if (userData) return userData;
+    
+    // Fallback: construct user data from individual sessionStorage/localStorage fields
+    const firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName');
+    const lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName');
+    
+    console.log('getCurrentUserData - firstName from storage:', firstName);
+    console.log('getCurrentUserData - lastName from storage:', lastName);
+    
+    if (firstName || lastName) {
+      const fallbackData = {
+        email: userEmail,
+        firstName: firstName || '',
+        lastName: lastName || ''
+      };
+      console.log('getCurrentUserData - returning fallback data:', fallbackData);
+      return fallbackData;
+    }
+    
+    console.log('getCurrentUserData - returning null');
+    return null;
   }
 
   // Clear user data

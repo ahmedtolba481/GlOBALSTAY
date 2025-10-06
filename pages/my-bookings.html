@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Bookings - Globalstay</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container">
+      <!-- Fallback navbar in case JavaScript fails -->
+      <nav class="navbar navbar-expand-xl navbar-light fixed-top" id="fallback-navbar" style="display: none;">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../assets/img/logo.jpg" alt="Globalstay" />
+            <span>Globalstay</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#why">Why Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#hotels">Hotels</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#testimonials">Testimonials</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#contact">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Aboutus.html">About</a>
+              </li>
+              <li class="nav-item ms-2">
+                <a class="btn btn-book" href="booking.html">Book Now</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="page-container">
+      <!-- Hero Section -->
+      <section class="hero-about" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../assets/img/photo-1520250497591-112f2f40a3f4.avif'); background-size: cover; background-position: center; padding: 12rem 0 8rem; margin-top: 80px; min-height: 100vh; overflow: visible;">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1 class="display-4 text-white mb-4">My Bookings</h1>
+              <p class="lead text-white mb-4">Manage your hotel reservations and bookings</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bookings Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div class="card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h5 class="mb-0">Your Bookings</h5>
+                  <a href="booking.html" class="btn btn-book">
+                    <i class="fas fa-plus me-2"></i>New Booking
+                  </a>
+                </div>
+                
+                <!-- Bookings List -->
+                <div id="bookingsList">
+                  <!-- No bookings message -->
+                  <div class="text-center py-5" id="noBookingsMessage">
+                    <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No bookings yet</h5>
+                    <p class="text-muted">You haven't made any bookings yet. Start exploring our amazing hotels!</p>
+                    <a href="booking.html" class="btn btn-book">
+                      <i class="fas fa-search me-2"></i>Find Hotels
+                    </a>
+                  </div>
+                  
+                  <!-- Bookings will be loaded here -->
+                  <div id="bookingsContainer" style="display: none;">
+                    <!-- Individual booking cards will be inserted here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="footer-brand">
+              <img
+                src="../assets/img/logo.jpg"
+                alt="Globalstay"
+              />
+              <span class="footer-brand-text">Globalstay</span>
+            </div>
+            <p>
+              Your trusted partner for finding the perfect accommodation
+              anywhere in the world. We offer the best choices with exceptional
+              customer service.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Company</h5>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Support</h5>
+            <ul class="footer-links">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Destinations</h5>
+            <ul class="footer-links">
+              <li><a href="#">Middle East</a></li>
+              <li><a href="#">Europe</a></li>
+              <li><a href="#">Asia</a></li>
+              <li><a href="#">Americas</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="footer-heading">Partners</h5>
+            <ul class="footer-links">
+              <li><a href="#">Hotels</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Travel Agents</a></li>
+              <li><a href="#">Corporate</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p class="mb-0">
+            © <span id="year"></span> Globalstay. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth-utils.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <!-- Fallback: Show navbar if JavaScript fails -->
+    <script>
+      // If navbar.js fails to load or execute, show the fallback navbar
+      setTimeout(() => {
+        const navbarContainer = document.getElementById('navbar-container');
+        if (navbarContainer && navbarContainer.children.length === 1) {
+          // Only fallback navbar is present, show it
+          document.getElementById('fallback-navbar').style.display = 'block';
+        }
+      }, 2000);
+    </script>
+    
+    <script>
+      // Load user bookings
+      function loadBookings() {
+        // Get current user's email to load their specific bookings
+        let currentUserEmail = '';
+        
+        // Try to get from AuthUtils first
+        try {
+          if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+            const userData = AuthUtils.getCurrentUserData();
+            if (userData && userData.email) {
+              currentUserEmail = userData.email;
+            }
+          }
+        } catch (error) {
+          console.log('AuthUtils not available, using fallback');
+        }
+        
+        // Fallback to sessionStorage/localStorage
+        if (!currentUserEmail) {
+          currentUserEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail') || '';
+        }
+        
+        // Load user-specific bookings
+        const userBookingsKey = `userBookings_${currentUserEmail}`;
+        const bookings = JSON.parse(localStorage.getItem(userBookingsKey) || '[]');
+        const noBookingsMessage = document.getElementById('noBookingsMessage');
+        const bookingsContainer = document.getElementById('bookingsContainer');
+        
+        if (bookings.length === 0) {
+          noBookingsMessage.style.display = 'block';
+          bookingsContainer.style.display = 'none';
+        } else {
+          noBookingsMessage.style.display = 'none';
+          bookingsContainer.style.display = 'block';
+          
+          // Display bookings (sort by creation date, newest first)
+          const sortedBookings = bookings.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+          
+          bookingsContainer.innerHTML = sortedBookings.map((booking, index) => `
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <h6 class="card-title mb-1">${booking.hotelName || 'Hotel Name'}</h6>
+                    <p class="card-text text-muted mb-1">
+                      <strong>Ref:</strong> ${booking.bookingReference || booking.id || '-'}
+                    </p>
+                    <p class="card-text text-muted mb-1">
+                      <i class="fas fa-map-marker-alt me-1"></i>
+                      ${booking.hotelLocation || 'Location'}
+                    </p>
+                    <p class="card-text text-muted mb-1">
+                      <i class="fas fa-calendar me-1"></i>
+                      ${booking.checkIn || 'Check-in date'} - ${booking.checkOut || 'Check-out date'}
+                    </p>
+                    <p class="card-text text-muted mb-1">
+                      <i class="fas fa-users me-1"></i>
+                      ${booking.guests || '1'} guest(s) • ${booking.rooms || '1'} room(s) • ${booking.roomType || 'Standard'} room
+                    </p>
+                    <p class="card-text text-muted mb-0">
+                      <i class="fas fa-clock me-1"></i>
+                      Booked on ${new Date(booking.createdAt || Date.now()).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-end">
+                    <h6 class="text-primary mb-1">$${booking.totalPrice || '0'}</h6>
+                    <span class="badge bg-success mb-2">${booking.status || 'Confirmed'}</span>
+                    <br>
+                    <small class="text-muted">${booking.nights || '1'} night(s)</small>
+                    <br>
+                    <button class="btn btn-outline-danger btn-sm mt-2" onclick="deleteBooking('${booking.id}')">
+                      <i class="fas fa-trash me-1"></i>Cancel
+                    </button>
+                  </div>
+                </div>
+                ${booking.specialRequests ? `
+                  <div class="mt-2">
+                    <small class="text-muted">
+                      <i class="fas fa-sticky-note me-1"></i>
+                      <strong>Special Requests:</strong> ${booking.specialRequests}
+                    </small>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Delete a booking
+      function deleteBooking(id) {
+        // Get current user's email to access their specific bookings
+        let currentUserEmail = '';
+        
+        try {
+          if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+            const userData = AuthUtils.getCurrentUserData();
+            if (userData && userData.email) {
+              currentUserEmail = userData.email;
+            }
+          }
+        } catch (error) {
+          console.log('AuthUtils not available, using fallback');
+        }
+        
+        if (!currentUserEmail) {
+          currentUserEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail') || '';
+        }
+        
+        const userBookingsKey = `userBookings_${currentUserEmail}`;
+        let bookings = JSON.parse(localStorage.getItem(userBookingsKey) || '[]');
+        bookings = bookings.filter(booking => booking.id !== id);
+        localStorage.setItem(userBookingsKey, JSON.stringify(bookings));
+        loadBookings(); // Reload bookings after deletion
+      }
+
+      // Initialize page
+      document.addEventListener('DOMContentLoaded', function() {
+        loadBookings();
+      });
+    </script>
+  </body>
+</html>

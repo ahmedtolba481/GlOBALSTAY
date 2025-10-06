@@ -422,16 +422,48 @@ function calculateTotal() {
 function handleBookingSubmit(e) {
   e.preventDefault();
 
-  // Get form data
-  const firstName = document.getElementById("guestFirstName").value;
-  const lastName = document.getElementById("guestLastName").value;
-  const email = document.getElementById("guestEmail").value;
+  // Get form data - try to get from current user first
+  let firstName = document.getElementById("guestFirstName").value;
+  let lastName = document.getElementById("guestLastName").value;
+  let email = document.getElementById("guestEmail").value;
   const phone = document.getElementById("guestPhone").value;
+
+  // If user is logged in, try to get their data from the new auth system
+  if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+    try {
+      const userData = AuthUtils.getCurrentUserData();
+      if (userData) {
+        // Use current user's data if form fields are empty
+        if (!firstName) firstName = userData.firstName || '';
+        if (!lastName) lastName = userData.lastName || '';
+        if (!email) email = userData.email || '';
+      }
+    } catch (error) {
+      console.log('Could not get user data, using form data');
+    }
+  }
+
+  // Fallback to sessionStorage/localStorage if AuthUtils fails
+  if (!firstName) {
+    firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName') || '';
+  }
+  if (!lastName) {
+    lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName') || '';
+  }
+  if (!email) {
+    email = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail') || '';
+  }
   const checkIn = document.getElementById("checkInDate").value;
   const checkOut = document.getElementById("checkOutDate").value;
   const numGuests = document.getElementById("numGuests").value;
   const roomType = document.getElementById("roomType").value;
   const specialRequests = document.getElementById("specialRequests").value;
+
+  // Booking reference (prefer already-generated value on page)
+  const bookingReferenceInput = document.getElementById("bookingReference");
+  const bookingReference = bookingReferenceInput && bookingReferenceInput.value
+    ? bookingReferenceInput.value
+    : generateBookingReference();
 
   // Validate dates
   const checkInDate = new Date(checkIn);
@@ -475,6 +507,7 @@ function handleBookingSubmit(e) {
     roomType: roomType,
     specialRequests: specialRequests,
     nights: nights,
+    bookingReference: bookingReference,
     roomPrices: {
       standard: selectedHotel.price,
       deluxe: selectedHotel.price * 1.3,
@@ -486,9 +519,43 @@ function handleBookingSubmit(e) {
   // Save booking data to sessionStorage
   sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
 
+  // Also save to localStorage for My Bookings page - user-specific
+  const currentUserEmail = email || sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
+  const userBookingsKey = `userBookings_${currentUserEmail}`;
+  const existingBookings = JSON.parse(localStorage.getItem(userBookingsKey) || '[]');
+  const bookingId = Date.now().toString(); // Simple ID generation
+  const bookingWithId = {
+    ...bookingData,
+    id: bookingId,
+    bookingReference: bookingReference,
+    userId: currentUserEmail, // Link to current user
+    status: 'Confirmed',
+    totalPrice: Math.round(selectedHotel.price * roomMultiplier * nights),
+    checkIn: checkIn,
+    checkOut: checkOut,
+    guests: numGuests,
+    rooms: 1, // Default to 1 room for now
+    createdAt: new Date().toISOString()
+  };
+  
+  existingBookings.push(bookingWithId);
+  localStorage.setItem(userBookingsKey, JSON.stringify(existingBookings));
+
   // Redirect to payment page
   window.location.href = 'pay.html';
 }
 
 // Make selectHotel available globally
 window.selectHotel = selectHotel;
+
+// Generate a human-friendly booking reference
+function generateBookingReference() {
+  const now = new Date();
+  const y = now.getFullYear().toString().slice(-2);
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `GS-${y}${m}${d}${h}${min}-${rnd}`;
+}
