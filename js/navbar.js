@@ -227,10 +227,17 @@ class NavbarComponent {
 
   // Logout function
   logout() {
-    sessionStorage.clear();
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('rememberMe');
+    // Use AuthUtils to properly clear user data
+    if (typeof AuthUtils !== 'undefined') {
+      AuthUtils.clearUserData();
+    } else {
+      // Fallback to manual clearing
+      sessionStorage.clear();
+      localStorage.removeItem('token');
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('userData');
+    }
     window.location.href = this.getRelativePath() + 'index.html';
   }
 

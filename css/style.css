@@ -290,6 +290,45 @@ body {
   display: inline-block;
 }
 
+/* Password strength indicator styles */
+#passwordStrengthIndicator {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #e9ecef;
+}
+
+#passwordRequirements li {
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+#passwordRequirements li.text-success {
+  font-weight: 500;
+}
+
+#passwordSuggestions {
+  background: rgba(13, 202, 240, 0.1);
+  border-radius: 6px;
+  padding: 8px;
+  border-left: 3px solid #0dcaf0;
+}
+
+#suggestionList li {
+  margin-bottom: 3px;
+  font-size: 0.85rem;
+}
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
 .profile-picture-upload::after {
   content: '';
   position: absolute;

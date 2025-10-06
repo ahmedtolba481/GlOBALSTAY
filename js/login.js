@@ -21,42 +21,63 @@ function showMessage(type, message) {
   `;
 }
 
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
   const rememberMe = document.getElementById("rememberMe").checked;
 
-  const storedEmail = localStorage.getItem("userEmail");
-  const storedPassword = localStorage.getItem("userPassword");
-  const storedFirstName = localStorage.getItem("userFirstName");
-  const storedLastName = localStorage.getItem("userLastName");
-
-  if (!storedEmail || !storedPassword) {
-    showMessage("warning", "No account found. Please <a href='signup.html'>create one</a> first.");
+  // Validate email format
+  if (!AuthUtils.validateEmail(email)) {
+    showMessage("danger", "Please enter a valid email address.");
     return;
   }
 
-  if (email === storedEmail && password === storedPassword) {
-    // Set login session
-    sessionStorage.setItem("isLoggedIn", "true");
-    sessionStorage.setItem("userFirstName", storedFirstName);
-    sessionStorage.setItem("userLastName", storedLastName);
-    sessionStorage.setItem("userEmail", storedEmail);
-    
-    // If remember me is checked, also store in localStorage
-    if (rememberMe) {
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("rememberMe", "true");
-    }
+  // Validate password
+  if (!password || password.length < 1) {
+    showMessage("danger", "Please enter your password.");
+    return;
+  }
 
-    showMessage("success", "Login successful! Redirecting...");
-    setTimeout(() => {
-      window.location.href = "booking.html";
-    }, 1500);
-  } else {
-    showMessage("danger", "Incorrect email or password.");
+  try {
+    // Show loading state
+    const submitBtn = document.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Signing in...';
+    submitBtn.disabled = true;
+
+    // Authenticate user with proper password hashing
+    const authResult = await AuthUtils.authenticateUser(email, password);
+
+    if (authResult.success) {
+      // Set login session
+      sessionStorage.setItem("isLoggedIn", "true");
+      sessionStorage.setItem("userFirstName", authResult.user.firstName);
+      sessionStorage.setItem("userLastName", authResult.user.lastName);
+      sessionStorage.setItem("userEmail", authResult.user.email);
+      
+      // If remember me is checked, also store in localStorage
+      if (rememberMe) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("rememberMe", "true");
+      }
+
+      showMessage("success", "Login successful! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "booking.html";
+      }, 1500);
+    } else {
+      showMessage("danger", authResult.message);
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    showMessage("danger", "An error occurred during login. Please try again.");
+  } finally {
+    // Reset button state
+    const submitBtn = document.querySelector('button[type="submit"]');
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
   }
 });
 

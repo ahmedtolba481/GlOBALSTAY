@@ -87,6 +87,46 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/></svg>
                   </button>
                 </div>
+                <!-- Password strength indicator -->
+                <div id="passwordStrengthIndicator" class="mt-2" style="display: none;">
+                  <div class="progress" style="height: 5px;">
+                    <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                  </div>
+                  <small id="passwordStrengthText" class="text-muted"></small>
+                  <!-- Password tips -->
+                  <div id="passwordTips" class="mt-2">
+                    <small class="text-muted">Password requirements:</small>
+                    <ul id="passwordRequirements" class="list-unstyled small mt-1">
+                      <li id="req-length" class="text-muted">
+                        <i class="fas fa-times text-danger me-1"></i>
+                        At least 8 characters
+                      </li>
+                      <li id="req-uppercase" class="text-muted">
+                        <i class="fas fa-times text-danger me-1"></i>
+                        One uppercase letter (A-Z)
+                      </li>
+                      <li id="req-lowercase" class="text-muted">
+                        <i class="fas fa-times text-danger me-1"></i>
+                        One lowercase letter (a-z)
+                      </li>
+                      <li id="req-number" class="text-muted">
+                        <i class="fas fa-times text-danger me-1"></i>
+                        One number (0-9)
+                      </li>
+                      <li id="req-special" class="text-muted">
+                        <i class="fas fa-times text-danger me-1"></i>
+                        One special character (!@#$%^&*)
+                      </li>
+                    </ul>
+                    <div id="passwordSuggestions" class="mt-2" style="display: none;">
+                      <small class="text-info">
+                        <i class="fas fa-lightbulb me-1"></i>
+                        <strong>Tips for a stronger password:</strong>
+                      </small>
+                      <ul id="suggestionList" class="list-unstyled small mt-1 text-info"></ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Confirm password</label>
@@ -129,6 +169,7 @@
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth-utils.js"></script>
     <script src="../js/signup.js"></script>
   </body>
 </html>
