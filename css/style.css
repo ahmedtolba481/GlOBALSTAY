@@ -21,6 +21,10 @@
   --shadow-hover: 0 20px 40px rgba(127, 79, 36, 0.15);
 }
 
+html, body {
+  min-height: 100%;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background: #ffffff;
@@ -29,6 +33,9 @@ body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* NAVBAR */
@@ -87,14 +94,274 @@ body {
   border-radius: 8px;
 }
 
-.nav-link:hover {
-  color: var(--primary) !important;
-  background: rgba(127, 79, 36, 0.05);
-}
-
+.nav-link:hover,
 .nav-link.active {
   color: var(--primary) !important;
   background: rgba(127, 79, 36, 0.1);
+  transform: scale(1.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Profile icon styling */
+.nav-item:last-child {
+  margin-left: auto !important;
+}
+
+.nav-link i.fas.fa-user {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.nav-link i.fas.fa-user:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* Profile dropdown styling */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  min-width: 180px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 9999;
+  transform: none;
+}
+
+/* Ensure navbar doesn't clip the dropdown */
+.navbar {
+  overflow: visible !important;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}
+
+.navbar-nav {
+  overflow: visible !important;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1.25rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item:hover {
+  background: rgba(127, 79, 36, 0.1);
+  color: var(--primary);
+}
+
+.dropdown-item i {
+  width: 16px;
+  text-align: center;
+}
+
+.dropdown-divider {
+  margin: 0.5rem 0;
+  border-color: var(--border);
+}
+
+/* Profile picture styling */
+#profilePictureContainer {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: visible !important;
+  z-index: 1;
+}
+
+#profilePictureContainer:hover {
+  border-color: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(127, 79, 36, 0.3);
+}
+
+#profilePictureContainer:hover .position-absolute {
+  background-color: var(--primary-dark) !important;
+}
+
+/* Hover overlay to indicate clickability */
+#profilePictureContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(127, 79, 36, 0.1);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 15;
+  pointer-events: none;
+}
+
+#profilePictureContainer:hover::before {
+  opacity: 1;
+}
+
+/* Cursor pointer to indicate clickability */
+#profilePictureContainer {
+  cursor: pointer;
+}
+
+/* Camera icon styling */
+#profilePictureContainer .position-absolute.top-0.end-0 {
+  z-index: 20 !important;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+#profilePictureContainer:hover .position-absolute.top-0.end-0 {
+  transform: scale(1.1);
+  background-color: var(--primary-dark) !important;
+}
+
+.profile-picture-upload {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-picture-upload::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-picture-upload:hover::after {
+  opacity: 1;
+}
+
+/* Profile picture menu styling */
+.profile-picture-menu {
+  min-width: 200px;
+  padding: 0;
+  border: 2px solid var(--primary);
+  box-shadow: 0 10px 30px rgba(127, 79, 36, 0.3);
+  border-radius: 12px;
+  z-index: 9999 !important;
+  background: white;
+  margin-top: 10px;
+}
+
+.profile-picture-menu .dropdown-header {
+  padding: 0.75rem 1rem 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  border-bottom: 1px solid var(--border);
+}
+
+.preset-avatar {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.preset-avatar:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(127, 79, 36, 0.3);
+}
+
+.profile-picture-menu .dropdown-item {
+  padding: 0.75rem 1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Center the preset avatars row */
+.profile-picture-menu .row {
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-picture-menu .col-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+}
+
+.profile-picture-menu .dropdown-item:hover {
+  background: rgba(127, 79, 36, 0.1);
+  color: var(--primary);
+}
+
+/* Welcome Message Styling */
+.welcome-message {
+  background: linear-gradient(135deg, rgba(127, 79, 36, 0.1), rgba(180, 137, 104, 0.1));
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid rgba(127, 79, 36, 0.2);
+  box-shadow: 0 4px 15px rgba(127, 79, 36, 0.1);
+}
+
+.welcome-message h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.welcome-message p {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  opacity: 0.8;
+}
+
+.profile-picture-menu .dropdown-item i {
+  width: 16px;
+  text-align: center;
 }
 
 .btn-book {
@@ -200,6 +467,8 @@ body {
 /* SECTIONS */
 .section {
   padding: 6rem 0;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -486,7 +755,7 @@ body {
   padding: 8rem 0;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .cta::before {
@@ -497,11 +766,12 @@ body {
   bottom: 0;
   left: 0;
   background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237f4f24' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: -1;
 }
 
 .cta-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .cta-title {
@@ -586,6 +856,8 @@ footer {
   background: var(--primary-dark);
   color: #e6ccb2;
   padding: 5rem 0 2rem;
+  position: relative;
+  z-index: 10;
 }
 
 footer a {
@@ -1261,11 +1533,12 @@ html {
     url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   color: white;
-  padding: 10rem 0 6rem;
+  padding: 12rem 0 8rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  margin-top: 80px;
+  min-height: 100vh;
 }
 
 .hero-about::before {
@@ -1293,13 +1566,13 @@ html {
 }
 
 .about-feature {
-  text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem;
   background: var(--light-bg);
   border-radius: 15px;
   border: 1px solid var(--border);
   height: 100%;
   transition: all 0.3s ease;
+  min-height: 120px;
 }
 
 .about-feature:hover {
@@ -1318,7 +1591,7 @@ html {
   justify-content: center;
   color: white;
   font-size: 2rem;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto;
   box-shadow: 0 8px 25px rgba(127, 79, 36, 0.2);
 }
 
@@ -1327,12 +1600,14 @@ html {
   font-weight: 700;
   margin-bottom: 1rem;
   font-size: 1.3rem;
+  text-align: left;
 }
 
 .about-feature p {
   color: var(--text-light);
   line-height: 1.6;
   margin: 0;
+  text-align: left;
 }
 
 .about-mission {
@@ -1353,4 +1628,56 @@ html {
   font-size: 1.1rem;
   line-height: 1.7;
   margin: 0;
+}
+
+/* About Features Responsive */
+@media (max-width: 991.98px) {
+  .about-feature {
+    min-height: 250px;
+    margin-bottom: 2rem;
+  }
+  
+  .about-feature .row {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .about-feature {
+    min-height: 220px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .about-feature .row {
+    gap: 1.5rem;
+  }
+  
+  .about-feature .col-md-2 {
+    margin-bottom: 1rem;
+  }
+  
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .about-feature h4 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .about-feature p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .about-feature .row {
+    gap: 2rem;
+  }
+  
+  .about-feature .col-md-2 {
+    margin-bottom: 1.5rem;
+  }
 }

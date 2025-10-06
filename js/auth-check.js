@@ -29,35 +29,9 @@
 })();
 
 function updateNavbar(firstName, lastName) {
-  const navbar = document.querySelector('.navbar-nav');
-  if (!navbar) return;
-
-  // Find the "Book Now" button
-  const bookNowItem = navbar.querySelector('.ms-2');
-  
-  if (bookNowItem) {
-    // Create user greeting element with "Welcome"
-    const userGreeting = document.createElement('li');
-    userGreeting.className = 'nav-item';
-    userGreeting.innerHTML = `
-      <span class="nav-link" style="color: var(--primary); font-weight: 600;">
-        <i class="fas fa-user-circle me-1"></i>Welcome, ${firstName}
-      </span>
-    `;
-
-    // Create logout button
-    const logoutItem = document.createElement('li');
-    logoutItem.className = 'nav-item ms-2';
-    logoutItem.innerHTML = `
-      <button class="btn btn-outline-secondary" onclick="logout()" style="padding: 0.7rem 1.8rem;">
-        <i class="fas fa-sign-out-alt me-1"></i>Logout
-      </button>
-    `;
-
-    // Replace Book Now button with user greeting and logout
-    bookNowItem.replaceWith(userGreeting);
-    navbar.appendChild(logoutItem);
-  }
+  // Don't modify the navbar - let the existing profile dropdown handle user display
+  // The profile dropdown is already in the HTML and will show the user icon
+  return;
 }
 
 // Logout function
