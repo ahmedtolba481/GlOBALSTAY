@@ -1,32 +1,9 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/home",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/pages/Aboutus.html"
-    },
-    {
-      "source": "/booking",
-      "destination": "/pages/booking.html"
-    },
-    {
-      "source": "/profile",
-      "destination": "/pages/profile.html"
-    },
-    {
-      "source": "/login",
-      "destination": "/pages/login.html"
-    },
-    {
-      "source": "/signup",
-      "destination": "/pages/signup.html"
+      "src": "**/*",
+      "use": "@vercel/static"
     }
   ]
 }
