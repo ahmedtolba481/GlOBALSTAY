@@ -38,7 +38,7 @@ class NavbarComponent {
 
           <!-- Profile + Burger grouped on the right for < 1200px -->
           <div class="d-flex ms-auto align-items-center d-xl-none">
-            <ul class="navbar-nav flex-row align-items-center gap-2">
+            <ul class="navbar-nav align-items-center">
               ${this.generateAuthItems(true)}
             </ul>
             <button
@@ -55,8 +55,7 @@ class NavbarComponent {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
               ${this.generateNavItems()}
-              <!-- Auth items INSIDE the menu only for >= 1200px -->
-              <span class="d-none d-xl-inline">${this.generateAuthItems(false)}</span>
+              ${this.generateAuthItems(false)}
             </ul>
           </div>
         </div>
@@ -114,26 +113,43 @@ class NavbarComponent {
       `;
     }
 
-    const signInId = isOutside ? 'signInItemOutside' : 'signInItem';
-    const profileItemId = isOutside ? 'profileItemOutside' : 'profileItem';
     const dropdownId = isOutside ? 'profileDropdownOutside' : 'profileDropdown';
     const iconContainerId = isOutside ? 'profileIconContainerOutside' : 'profileIconContainer';
     const iconImageId = isOutside ? 'profileIconImageOutside' : 'profileIconImage';
     const iconFallbackId = isOutside ? 'profileIconFallbackOutside' : 'navbarProfileIconFallback';
     const userNameDisplayId = isOutside ? 'userNameDisplayOutside' : 'userNameDisplay';
-    const visibilityClass = isOutside ? 'd-xl-none' : '';
 
+    if (isOutside) {
+      // Outside: only show profile dropdown (for logged-in users) on < 1200px
+      return `
+        <li class="nav-item dropdown ms-2 d-xl-none" id="profileItemOutside" style="display: none;">
+          <a class="nav-link dropdown-toggle" href="#" id="${dropdownId}" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-container="body">
+            <div class="profile-icon-container" id="${iconContainerId}" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary); position: relative;">
+              <img id="${iconImageId}" src="" alt="Profile" style="width: 18px; height: 18px; object-fit: cover; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;">
+              <i id="${iconFallbackId}" class="fas fa-user" style="color: white; font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"></i>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="${dropdownId}">
+            <li><div class="dropdown-header" id="${userNameDisplayId}">Loading...</div></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="${this.getRelativePath()}pages/profile.html"><i class="fas fa-user me-2"></i>View Profile</a></li>
+            <li><a class="dropdown-item" href="${this.getRelativePath()}pages/my-bookings.html"><i class="fas fa-calendar me-2"></i>My Bookings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+          </ul>
+        </li>
+      `;
+    }
+
+    // Inside (in the collapsible menu): Book Now always, Sign In only when logged out, Profile only when logged in
     return `
-      <li class="nav-item ms-2 ${visibilityClass}" id="${signInId}" style="display: none;">
+      <li class="nav-item ms-2" id="bookNowItem">
         <a class="btn btn-book" href="${this.getRelativePath()}pages/booking.html">Book Now</a>
       </li>
-      <!-- Sign In Button (shown when logged out) -->
-      <li class="nav-item ms-2 ${visibilityClass}" id="${signInId}_login" style="display: none;">
+      <li class="nav-item ms-2" id="signInLogin" style="display: none;">
         <a class="btn btn-outline-dark" href="${this.getRelativePath()}pages/login.html"><i class="fas fa-sign-in-alt me-1"></i>Sign In</a>
       </li>
-      
-      <!-- Profile Dropdown (shown when logged in) -->
-      <li class="nav-item dropdown ms-2 ${visibilityClass}" id="${profileItemId}" style="display: none;">
+      <li class="nav-item dropdown ms-2" id="profileItem" style="display: none;">
         <a class="nav-link dropdown-toggle" href="#" id="${dropdownId}" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-container="body">
           <div class="profile-icon-container" id="${iconContainerId}" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary); position: relative;">
             <img id="${iconImageId}" src="" alt="Profile" style="width: 18px; height: 18px; object-fit: cover; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;">
@@ -201,7 +217,7 @@ class NavbarComponent {
   // Load profile icon
   loadProfileIcon() {
     const imageIds = ['profileIconImage', 'navbarProfileIconImage', 'profileIconImageOutside'];
-    const fallbackIds = ['profileIconFallback', 'navbarProfileIconFallback', 'profileIconFallbackOutside'];
+    const fallbackIds = ['navbarProfileIconFallback', 'profileIconFallback', 'profileIconFallbackOutside'];
     const images = imageIds.map(id => document.getElementById(id)).filter(Boolean);
     const fallbacks = fallbackIds.map(id => document.getElementById(id)).filter(Boolean);
 
@@ -248,29 +264,20 @@ class NavbarComponent {
       return; // These pages handle their own navbar
     }
 
-    const signInItem = document.getElementById('signInItem');
-    const signInItemLogin = document.getElementById('signInItem_login');
-    const signInItemOutside = document.getElementById('signInItemOutside');
-    const signInItemOutsideLogin = document.getElementById('signInItemOutside_login');
+    const signInLogin = document.getElementById('signInLogin');
     const profileItem = document.getElementById('profileItem');
     const profileItemOutside = document.getElementById('profileItemOutside');
 
     if (this.isLoggedIn) {
-      // User is logged in - show profile dropdown
-      if (signInItem) signInItem.style.display = 'none';
-      if (signInItemLogin) signInItemLogin.style.display = 'none';
-      if (signInItemOutside) signInItemOutside.style.display = 'none';
-      if (signInItemOutsideLogin) signInItemOutsideLogin.style.display = 'none';
+      // Logged in: hide Sign In; show profile (inside and outside)
+      if (signInLogin) signInLogin.style.display = 'none';
       if (profileItem) profileItem.style.display = 'block';
       if (profileItemOutside) profileItemOutside.style.display = 'block';
       this.loadUserName();
       this.loadProfileIcon();
     } else {
-      // User is not logged in - show sign in button
-      if (signInItem) signInItem.style.display = 'block';
-      if (signInItemLogin) signInItemLogin.style.display = 'block';
-      if (signInItemOutside) signInItemOutside.style.display = 'block';
-      if (signInItemOutsideLogin) signInItemOutsideLogin.style.display = 'block';
+      // Logged out: show Sign In; hide profile
+      if (signInLogin) signInLogin.style.display = 'block';
       if (profileItem) profileItem.style.display = 'none';
       if (profileItemOutside) profileItemOutside.style.display = 'none';
     }

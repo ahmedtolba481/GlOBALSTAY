@@ -164,15 +164,15 @@ body {
     bottom: auto;
     width: auto;
   }
-
-  /* Keep outside auth items inline next to burger */
-  .navbar .navbar-nav.flex-row .nav-item {
-    width: auto;
-    margin-bottom: 0;
+  /* Make action buttons expand full width inside burger menu */
+  .navbar-collapse .navbar-nav .nav-item { width: 100%; }
+  .navbar-collapse .navbar-nav .nav-item .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
-  .navbar .navbar-nav.flex-row .btn {
-    white-space: nowrap;
-  }
+  /* Add comfortable spacing between stacked full-width buttons */
+  .navbar-collapse .navbar-nav .nav-item + .nav-item { margin-top: 0.5rem; }
 }
 
 /* Ensure navbar doesn't clip the dropdown */
