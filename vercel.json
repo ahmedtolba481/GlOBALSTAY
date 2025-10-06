@@ -1,8 +1,16 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/home",
       "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/pages/Aboutus.html"
+    },
+    {
+      "source": "/booking",
+      "destination": "/pages/booking.html"
     }
   ]
 }
