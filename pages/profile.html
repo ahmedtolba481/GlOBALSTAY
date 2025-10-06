@@ -134,6 +134,9 @@
                       <li><a class="dropdown-item" href="#" onclick="document.getElementById('profilePictureInput').click()">
                         <i class="fas fa-upload me-2"></i>Upload Your Own
                       </a></li>
+                      <li><a class="dropdown-item text-danger" href="#" onclick="removeProfilePicture()">
+                        <i class="fas fa-trash me-2"></i>Remove Profile Picture
+                      </a></li>
                     </ul>
                   </div>
                   <input
@@ -365,9 +368,17 @@
         if (!navbarProfileIconImage || !navbarProfileIconFallback) return;
 
         if (imageSrc) {
-          // Show uploaded image in navbar
+          // Show uploaded image in navbar with correct sizing
           navbarProfileIconImage.src = imageSrc;
           navbarProfileIconImage.style.display = 'block';
+          navbarProfileIconImage.style.width = '18px';
+          navbarProfileIconImage.style.height = '18px';
+          navbarProfileIconImage.style.objectFit = 'cover';
+          navbarProfileIconImage.style.position = 'absolute';
+          navbarProfileIconImage.style.top = '50%';
+          navbarProfileIconImage.style.left = '50%';
+          navbarProfileIconImage.style.transform = 'translate(-50%, -50%)';
+          navbarProfileIconImage.style.borderRadius = '50%';
           navbarProfileIconFallback.style.display = 'none';
         } else if (iconClass) {
           // Show preset icon in navbar
@@ -423,6 +434,48 @@
           // Replace the old icon with the new one
           profilePictureIcon.parentNode.replaceChild(newIcon, profilePictureIcon);
         }
+      }
+
+      // Remove profile picture
+      function removeProfilePicture() {
+        const profilePicture = document.getElementById('profilePicture');
+        const profilePictureIcon = document.getElementById('profilePictureIcon');
+        
+        // Hide the uploaded image
+        profilePicture.src = '';
+        profilePicture.style.display = 'none';
+        
+        // Show the default icon
+        profilePictureIcon.style.display = 'block';
+        profilePictureIcon.className = 'fas fa-user';
+        profilePictureIcon.style.fontSize = '28px';
+        profilePictureIcon.style.color = 'var(--primary)';
+        profilePictureIcon.style.position = 'relative';
+        profilePictureIcon.style.zIndex = '1';
+        
+        // Clear saved data from localStorage
+        localStorage.removeItem('profilePicture');
+        localStorage.removeItem('profilePictureIcon');
+        localStorage.removeItem('profilePictureType');
+        
+        // Update navbar profile icon to default
+        updateNavbarProfileIcon(null, 'fas fa-user');
+        
+        // Close the dropdown
+        const dropdownElement = document.getElementById('profilePictureMainDropdown');
+        const dropdown = bootstrap.Dropdown.getInstance(dropdownElement) || new bootstrap.Dropdown(dropdownElement);
+        dropdown.hide();
+        
+        // Show a brief confirmation message
+        const originalText = document.querySelector('[onclick="removeProfilePicture()"]').innerHTML;
+        const removeButton = document.querySelector('[onclick="removeProfilePicture()"]');
+        removeButton.innerHTML = '<i class="fas fa-check me-2"></i>Removed!';
+        removeButton.classList.add('text-success');
+        
+        setTimeout(() => {
+          removeButton.innerHTML = originalText;
+          removeButton.classList.remove('text-success');
+        }, 2000);
       }
 
       // Generate time-based welcome message

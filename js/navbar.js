@@ -185,9 +185,17 @@ class NavbarComponent {
     const savedIcon = localStorage.getItem('profilePictureIcon');
     
     if (savedPicture) {
-      // Show uploaded image
+      // Show uploaded image with correct sizing
       profileIconImage.src = savedPicture;
       profileIconImage.style.display = 'block';
+      profileIconImage.style.width = '18px';
+      profileIconImage.style.height = '18px';
+      profileIconImage.style.objectFit = 'cover';
+      profileIconImage.style.position = 'absolute';
+      profileIconImage.style.top = '50%';
+      profileIconImage.style.left = '50%';
+      profileIconImage.style.transform = 'translate(-50%, -50%)';
+      profileIconImage.style.borderRadius = '50%';
       profileIconFallback.style.display = 'none';
     } else if (savedIcon) {
       // Show preset icon - create a new icon element

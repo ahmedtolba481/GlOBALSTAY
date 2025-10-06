@@ -364,6 +364,21 @@ body {
   transition: height 0.3s ease;
 }
 
+/* Profile picture dropdown remove button */
+.dropdown-item.text-danger {
+  transition: all 0.3s ease;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545 !important;
+}
+
+.dropdown-item.text-danger:focus {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545 !important;
+}
+
 .profile-picture-upload::after {
   content: '';
   position: absolute;
