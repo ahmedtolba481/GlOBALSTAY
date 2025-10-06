@@ -239,6 +239,11 @@ class NavbarComponent {
     const navbarContainer = document.getElementById('navbar-container');
     if (navbarContainer) {
       navbarContainer.innerHTML = this.generateNavbar();
+      // Hide fallback navbar
+      const fallbackNav = document.getElementById('fallback-navbar');
+      if (fallbackNav) {
+        fallbackNav.style.display = 'none';
+      }
     } else {
       // Fallback: replace existing navbar if container doesn't exist
       const existingNav = document.querySelector('nav');
@@ -313,13 +318,19 @@ class NavbarComponent {
 
 // Auto-initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing navbar...');
+  
   try {
     const navbar = new NavbarComponent();
+    console.log('Navbar component created successfully');
     navbar.init();
+    console.log('Navbar initialized successfully');
   } catch (error) {
     console.error('Error initializing navbar:', error);
     // Fallback: show a simple navbar if the component fails
     const navbarContainer = document.getElementById('navbar-container');
+    console.log('Navbar container found:', !!navbarContainer);
+    
     if (navbarContainer) {
       navbarContainer.innerHTML = `
         <nav class="navbar navbar-expand-xl navbar-light fixed-top">
@@ -334,6 +345,22 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </nav>
       `;
+      console.log('Fallback navbar inserted');
+    } else {
+      console.error('Navbar container not found!');
     }
   }
 });
+
+// Also try to initialize immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+  console.log('DOM still loading, waiting for DOMContentLoaded');
+} else {
+  console.log('DOM already loaded, initializing navbar immediately');
+  try {
+    const navbar = new NavbarComponent();
+    navbar.init();
+  } catch (error) {
+    console.error('Error initializing navbar immediately:', error);
+  }
+}
