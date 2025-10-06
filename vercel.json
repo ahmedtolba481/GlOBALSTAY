@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/index.html"
+    },
+    {
       "source": "/home",
       "destination": "/index.html"
     },
@@ -11,6 +19,18 @@
     {
       "source": "/booking",
       "destination": "/pages/booking.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/pages/profile.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/pages/login.html"
+    },
+    {
+      "source": "/signup",
+      "destination": "/pages/signup.html"
     }
   ]
 }
