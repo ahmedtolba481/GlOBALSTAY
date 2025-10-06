@@ -65,8 +65,10 @@ body {
   align-items: center;
   gap: 12px;
   max-width: calc(100vw - 100px);
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
+  padding: 5px;
+  margin: -5px;
 }
 
 .navbar-brand img {
@@ -82,6 +84,9 @@ body {
 .navbar-brand:hover img {
   transform: scale(1.1) rotate(5deg);
   border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(127, 79, 36, 0.3);
+  z-index: 10;
+  position: relative;
 }
 
 .nav-link {
