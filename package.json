@@ -1,0 +1,13 @@
+{
+  "name": "hotel-website",
+  "version": "1.0.0",
+  "description": "Static HTML Hotel Website",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Static site - no start needed'"
+  },
+  "keywords": ["hotel", "website", "static"],
+  "author": "Globalstay",
+  "license": "MIT"
+}

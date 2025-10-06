@@ -1,0 +1,57 @@
+.auth-page {
+  background: linear-gradient(135deg, #fff7f0, #ffe9d6);
+}
+
+.auth-page .section {
+  padding: 5rem 0;
+}
+.auth-card {
+  background: #ffffff;
+  border: 1px solid #e9d7c4;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(127, 79, 36, 0.08);
+  will-change: transform, opacity;
+  animation: auth-pop 300ms ease-out;
+}
+
+.auth-fade-up {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: auth-fade-up 480ms ease-out forwards;
+}
+.auth-page .section-title {
+  color: #7f4f24;
+}
+
+.auth-page a {
+  color: #9c6644;
+}
+.auth-page a:hover {
+  color: #7f4f24;
+}
+.auth-page .form-control:focus {
+  border-color: #ddb892;
+  box-shadow: 0 0 0 3px rgba(221, 184, 146, 0.15);
+}
+
+@keyframes auth-pop {
+  0% {
+    transform: scale(0.98);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(127, 79, 36, 0.08);
+  }
+}
+
+@keyframes auth-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

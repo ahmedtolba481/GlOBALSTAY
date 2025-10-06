@@ -1,36 +1,43 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/",
-      "destination": "/index.html"
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/public/index.html"
     },
     {
-      "source": "/index.html",
-      "destination": "/index.html"
+      "src": "/home",
+      "dest": "/public/index.html"
     },
     {
-      "source": "/home",
-      "destination": "/index.html"
+      "src": "/about",
+      "dest": "/public/pages/Aboutus.html"
     },
     {
-      "source": "/about",
-      "destination": "/pages/Aboutus.html"
+      "src": "/booking",
+      "dest": "/public/pages/booking.html"
     },
     {
-      "source": "/booking",
-      "destination": "/pages/booking.html"
+      "src": "/profile",
+      "dest": "/public/pages/profile.html"
     },
     {
-      "source": "/profile",
-      "destination": "/pages/profile.html"
+      "src": "/login",
+      "dest": "/public/pages/login.html"
     },
     {
-      "source": "/login",
-      "destination": "/pages/login.html"
+      "src": "/signup",
+      "dest": "/public/pages/signup.html"
     },
     {
-      "source": "/signup",
-      "destination": "/pages/signup.html"
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
