@@ -118,9 +118,9 @@ class NavbarComponent {
       <!-- Profile Dropdown (shown when logged in) -->
       <li class="nav-item dropdown ms-2" id="profileItem" style="display: none;">
         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <div class="profile-icon-container" id="profileIconContainer" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary);">
-            <img id="profileIconImage" src="" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: none;">
-            <i id="navbarProfileIconFallback" class="fas fa-user" style="color: white; font-size: 20px;"></i>
+          <div class="profile-icon-container" id="profileIconContainer" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--primary); position: relative;">
+            <img id="profileIconImage" src="" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top: 0; left: 0;">
+            <i id="navbarProfileIconFallback" class="fas fa-user" style="color: white; font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"></i>
           </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
