@@ -175,6 +175,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth-utils.js"></script>
     <script src="../js/auth-check.js"></script>
     <script src="../js/profile.js"></script>
     <script>
@@ -195,24 +196,29 @@
         
         if (!profileUserName) return;
 
-        // Get user data from localStorage
-        let userData = {};
-        const possibleKeys = ['userData', 'user', 'currentUser', 'loggedInUser', 'userInfo'];
-        for (let key of possibleKeys) {
-          const data = localStorage.getItem(key);
-          if (data) {
-            try {
-              userData = JSON.parse(data);
-              break;
-            } catch (e) {
-              // Continue to next key
+        let firstName = '';
+        let lastName = '';
+
+        // Try to get user data from the new authentication system
+        try {
+          if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+            const userData = AuthUtils.getCurrentUserData();
+            if (userData) {
+              firstName = userData.firstName || '';
+              lastName = userData.lastName || '';
             }
           }
+        } catch (error) {
+          console.log('AuthUtils not available, using fallback');
         }
 
-        // Get first and last name
-        const firstName = userData.firstName || userData.first_name || localStorage.getItem('userFirstName');
-        const lastName = userData.lastName || userData.last_name || localStorage.getItem('userLastName');
+        // Fallback to sessionStorage/localStorage
+        if (!firstName) {
+          firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName') || '';
+        }
+        if (!lastName) {
+          lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName') || '';
+        }
 
         // Display full name
         if (firstName && lastName) {
@@ -443,7 +449,7 @@
           subtext = "Sweet dreams and see you tomorrow";
         }
         
-        // Get user's name from the profile display or localStorage
+        // Get user's name from the profile display or authentication system
         const profileNameElement = document.getElementById('profileName');
         let userName = 'Guest';
         
@@ -453,26 +459,25 @@
           // Extract just the first name
           userName = fullName.split(' ')[0];
         } else {
-          // Try to get first name from localStorage with comprehensive checking
-          let userData = {};
-          const possibleKeys = ['userData', 'user', 'currentUser', 'loggedInUser', 'userInfo'];
-          for (let key of possibleKeys) {
-            const data = localStorage.getItem(key);
-            if (data) {
-              try {
-                userData = JSON.parse(data);
-                break;
-              } catch (e) {
-                // Continue to next key
+          // Try to get user data from the new authentication system
+          try {
+            if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+              const userData = AuthUtils.getCurrentUserData();
+              if (userData && userData.firstName) {
+                userName = userData.firstName;
               }
             }
+          } catch (error) {
+            console.log('AuthUtils not available, using fallback');
           }
-          
-          // Try different first name fields
-          userName = userData.firstName || userData.first_name || 
-                    localStorage.getItem('firstName') || 
-                    localStorage.getItem('first_name') || 
-                    localStorage.getItem('userFirstName') || 'Guest';
+
+          // Fallback to sessionStorage/localStorage
+          if (userName === 'Guest') {
+            const firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName');
+            if (firstName) {
+              userName = firstName;
+            }
+          }
         }
         
         welcomeText.textContent = `${greeting} ${userName}!`;
@@ -481,28 +486,34 @@
 
       // Load profile data
       function loadProfileData() {
-        // Get user data from localStorage - check multiple possible keys
-        let userData = {};
-        
-        // Try different localStorage keys where user data might be stored
-        const possibleKeys = ['userData', 'user', 'currentUser', 'loggedInUser', 'userInfo'];
-        for (let key of possibleKeys) {
-          const data = localStorage.getItem(key);
-          if (data) {
-            try {
-              userData = JSON.parse(data);
-              console.log('Found user data in key:', key, userData);
-              break;
-            } catch (e) {
-              console.log('Failed to parse data from key:', key);
+        let firstName = '';
+        let lastName = '';
+        let email = '';
+
+        // Try to get user data from the new authentication system
+        try {
+          if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+            const userData = AuthUtils.getCurrentUserData();
+            if (userData) {
+              firstName = userData.firstName || '';
+              lastName = userData.lastName || '';
+              email = userData.email || '';
             }
           }
+        } catch (error) {
+          console.log('AuthUtils not available, using fallback');
         }
-        
-        // Also check for individual fields in localStorage
-        const firstName = localStorage.getItem('firstName') || localStorage.getItem('first_name') || localStorage.getItem('userFirstName');
-        const lastName = localStorage.getItem('lastName') || localStorage.getItem('last_name') || localStorage.getItem('userLastName');
-        const email = localStorage.getItem('email') || localStorage.getItem('userEmail');
+
+        // Fallback to sessionStorage/localStorage
+        if (!firstName) {
+          firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName') || '';
+        }
+        if (!lastName) {
+          lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName') || '';
+        }
+        if (!email) {
+          email = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail') || '';
+        }
         
         const profileName = document.getElementById('profileName');
         const profileEmail = document.getElementById('profileEmail');
@@ -511,33 +522,19 @@
         if (profileName) {
           let fullName = '';
           
-          // Try to get name from userData object
-          if (userData.firstName && userData.lastName) {
-            fullName = userData.firstName + ' ' + userData.lastName;
-          } else if (userData.first_name && userData.last_name) {
-            fullName = userData.first_name + ' ' + userData.last_name;
-          } else if (userData.name) {
-            fullName = userData.name;
-          } else if (userData.fullName) {
-            fullName = userData.fullName;
-          }
-          // Try individual localStorage fields
-          else if (firstName && lastName) {
+          if (firstName && lastName) {
             fullName = firstName + ' ' + lastName;
-          }
-          
-          // Final fallback
-          if (!fullName || fullName.trim() === '') {
+          } else if (firstName) {
+            fullName = firstName;
+          } else {
             fullName = 'Guest User';
           }
           
           profileName.textContent = fullName.trim();
-          console.log('Set profile name to:', fullName.trim());
         }
         
         if (profileEmail) {
-          const userEmail = userData.email || email || 'No email provided';
-          profileEmail.textContent = userEmail;
+          profileEmail.textContent = email || 'No email provided';
         }
         
         // Update welcome message after profile data is loaded

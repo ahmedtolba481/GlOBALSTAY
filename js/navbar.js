@@ -139,24 +139,29 @@ class NavbarComponent {
     const userNameDisplay = document.getElementById('userNameDisplay') || document.getElementById('profileUserName');
     if (!userNameDisplay) return;
 
-    // Get user data from localStorage
-    let userData = {};
-    const possibleKeys = ['userData', 'user', 'currentUser', 'loggedInUser', 'userInfo'];
-    for (let key of possibleKeys) {
-      const data = localStorage.getItem(key);
-      if (data) {
-        try {
-          userData = JSON.parse(data);
-          break;
-        } catch (e) {
-          // Continue to next key
+    let firstName = '';
+    let lastName = '';
+
+    // Try to get user data from the new authentication system
+    try {
+      if (typeof AuthUtils !== 'undefined' && AuthUtils.getCurrentUserData) {
+        const userData = AuthUtils.getCurrentUserData();
+        if (userData) {
+          firstName = userData.firstName || '';
+          lastName = userData.lastName || '';
         }
       }
+    } catch (error) {
+      console.log('AuthUtils not available, using fallback');
     }
 
-    // Get first and last name
-    const firstName = userData.firstName || userData.first_name || localStorage.getItem('userFirstName');
-    const lastName = userData.lastName || userData.last_name || localStorage.getItem('userLastName');
+    // Fallback to sessionStorage/localStorage
+    if (!firstName) {
+      firstName = sessionStorage.getItem('userFirstName') || localStorage.getItem('userFirstName') || '';
+    }
+    if (!lastName) {
+      lastName = sessionStorage.getItem('userLastName') || localStorage.getItem('userLastName') || '';
+    }
 
     // Display full name
     if (firstName && lastName) {

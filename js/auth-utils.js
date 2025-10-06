@@ -199,6 +199,14 @@ class AuthUtils {
     }
   }
 
+  // Get current logged-in user data
+  static getCurrentUserData() {
+    const userEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
+    if (!userEmail) return null;
+    
+    return this.getUserData(userEmail);
+  }
+
   // Clear user data
   static clearUserData() {
     // Don't clear 'users' data as it contains all registered accounts
