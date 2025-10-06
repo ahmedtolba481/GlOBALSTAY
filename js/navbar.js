@@ -29,7 +29,7 @@ class NavbarComponent {
         <div class="container">
           <a class="navbar-brand" href="${this.getHomeLink()}">
             <img
-              src="${this.getImagePath()}assets/media/logo.png"
+              src="${this.getImagePath()}assets/img/logo.jpg"
               alt="Globalstay"
             />
             <span>Globalstay</span>
