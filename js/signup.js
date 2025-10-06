@@ -56,7 +56,7 @@ document.getElementById("signupPassword").addEventListener("input", function() {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>_-]/.test(password);
     
     // Update requirement checkmarks
     updateRequirement('req-length', hasLength);
@@ -92,12 +92,19 @@ document.getElementById("signupPassword").addEventListener("input", function() {
     strengthBar.className = `progress-bar ${color}`;
     strengthText.textContent = `Password strength: ${strength}`;
     
-    // Show suggestions for weak passwords
+    // Show/hide suggestions based on password strength
+    const goodMessage = document.getElementById('passwordGoodMessage');
+    
     if (strength === "Weak" || strength === "Medium") {
       suggestions.style.display = "block";
+      if (goodMessage) goodMessage.style.display = "none";
       showPasswordSuggestions(password, hasLength, hasUpperCase, hasLowerCase, hasNumbers, hasSpecialChar);
+    } else if (strength === "Strong" || strength === "Very Strong") {
+      suggestions.style.display = "none";
+      if (goodMessage) goodMessage.style.display = "block";
     } else {
       suggestions.style.display = "none";
+      if (goodMessage) goodMessage.style.display = "none";
     }
   } else {
     indicator.style.display = "none";
@@ -139,9 +146,9 @@ function showPasswordSuggestions(password, hasLength, hasUpperCase, hasLowerCase
     suggestions.push('• Include numbers (1, 2, 3...)');
   }
   
-  if (!hasSpecialChar) {
-    suggestions.push('• Add special characters (!, @, #, $...)');
-  }
+      if (!hasSpecialChar) {
+        suggestions.push('• Add special characters (!, @, #, $, _, -...)');
+      }
   
   // Additional tips for stronger passwords
   if (password.length < 12) {
@@ -173,6 +180,18 @@ function showPasswordSuggestions(password, hasLength, hasUpperCase, hasLowerCase
   
   suggestionList.innerHTML = suggestions.map(suggestion => `<li>${suggestion}</li>`).join('');
 }
+
+// Handle password tips dropdown toggle
+document.getElementById("passwordTipsToggle").addEventListener("click", function() {
+  const tipsCollapse = document.getElementById('passwordTipsCollapse');
+  const isExpanded = tipsCollapse.classList.contains('show');
+  
+  if (isExpanded) {
+    this.innerHTML = '<i class="fas fa-lightbulb me-1"></i>Show Tips';
+  } else {
+    this.innerHTML = '<i class="fas fa-lightbulb me-1"></i>Hide Tips';
+  }
+});
 
 document.getElementById("signupForm").addEventListener("submit", async function(e) {
   e.preventDefault();
@@ -233,8 +252,8 @@ document.getElementById("signupForm").addEventListener("submit", async function(
     await AuthUtils.storeUserData(userData);
 
     showMessage("success", `✅ Account created successfully! Password strength: ${passwordValidation.strength}. Redirecting to login...`);
-    setTimeout(() => {
-      window.location.href = "login.html";
+  setTimeout(() => {
+    window.location.href = "login.html";
     }, 2000);
   } catch (error) {
     console.error("Signup error:", error);

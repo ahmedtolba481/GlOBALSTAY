@@ -294,8 +294,34 @@ body {
 #passwordStrengthIndicator {
   background: rgba(248, 249, 250, 0.8);
   border-radius: 8px;
-  padding: 12px;
+  padding: 15px;
   border: 1px solid #e9ecef;
+  margin-top: 10px;
+}
+
+#passwordStrengthIndicator .progress {
+  border-radius: 10px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+#passwordStrengthIndicator .progress-bar {
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+#passwordTipsToggle {
+  transition: all 0.3s ease;
+  border: 1px solid #6c757d;
+}
+
+#passwordTipsToggle:hover {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+#passwordTipsToggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
 }
 
 #passwordRequirements li {
@@ -327,6 +353,15 @@ body {
 .progress-bar {
   transition: all 0.3s ease;
   border-radius: 10px;
+}
+
+/* Collapse animation improvements */
+.collapse {
+  transition: height 0.3s ease;
+}
+
+.collapsing {
+  transition: height 0.3s ease;
 }
 
 .profile-picture-upload::after {

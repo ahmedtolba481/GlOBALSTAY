@@ -24,7 +24,7 @@ class AuthUtils {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>_-]/.test(password);
 
     const errors = [];
     
@@ -116,22 +116,30 @@ class AuthUtils {
       lastLogin: null
     };
 
-    // Store in localStorage (in a real app, this would be sent to a server)
-    localStorage.setItem('userData', JSON.stringify(secureUserData));
+    // Get existing users or create new object
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    
+    // Store user by email as key
+    users[userData.email] = secureUserData;
+    
+    // Store all users back to localStorage
+    localStorage.setItem('users', JSON.stringify(users));
+    
     return secureUserData;
   }
 
   // Authenticate user
   static async authenticateUser(email, password) {
-    const storedUserData = localStorage.getItem('userData');
-    if (!storedUserData) {
+    const storedUsers = localStorage.getItem('users');
+    if (!storedUsers) {
       return { success: false, message: 'No account found with this email' };
     }
 
     try {
-      const userData = JSON.parse(storedUserData);
+      const users = JSON.parse(storedUsers);
+      const userData = users[email];
       
-      if (userData.email !== email) {
+      if (!userData) {
         return { success: false, message: 'No account found with this email' };
       }
 
@@ -140,7 +148,8 @@ class AuthUtils {
       if (isValidPassword) {
         // Update last login
         userData.lastLogin = new Date().toISOString();
-        localStorage.setItem('userData', JSON.stringify(userData));
+        users[email] = userData;
+        localStorage.setItem('users', JSON.stringify(users));
         
         return { 
           success: true, 
@@ -162,24 +171,27 @@ class AuthUtils {
 
   // Check if user exists
   static userExists(email) {
-    const storedUserData = localStorage.getItem('userData');
-    if (!storedUserData) return false;
+    const storedUsers = localStorage.getItem('users');
+    if (!storedUsers) return false;
     
     try {
-      const userData = JSON.parse(storedUserData);
-      return userData.email === email;
+      const users = JSON.parse(storedUsers);
+      return !!users[email];
     } catch (error) {
       return false;
     }
   }
 
   // Get user data (without password)
-  static getUserData() {
-    const storedUserData = localStorage.getItem('userData');
-    if (!storedUserData) return null;
+  static getUserData(email) {
+    const storedUsers = localStorage.getItem('users');
+    if (!storedUsers) return null;
     
     try {
-      const userData = JSON.parse(storedUserData);
+      const users = JSON.parse(storedUsers);
+      const userData = users[email];
+      if (!userData) return null;
+      
       const { passwordHash, salt, ...safeUserData } = userData;
       return safeUserData;
     } catch (error) {
@@ -189,8 +201,14 @@ class AuthUtils {
 
   // Clear user data
   static clearUserData() {
-    localStorage.removeItem('userData');
+    // Don't clear 'users' data as it contains all registered accounts
+    // Only clear session and login status
     sessionStorage.clear();
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('rememberMe');
+    localStorage.removeItem('userFirstName');
+    localStorage.removeItem('userLastName');
+    localStorage.removeItem('userEmail');
   }
 }
 
