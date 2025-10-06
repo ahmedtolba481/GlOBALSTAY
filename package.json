@@ -1,0 +1,14 @@
+{
+  "name": "globalstay-hotel",
+  "version": "1.0.0",
+  "description": "GlobalStay Hotel Booking Website - Static HTML Site",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Static site - no start needed'",
+    "dev": "echo 'Static site - no dev server needed'"
+  },
+  "keywords": ["hotel", "booking", "travel", "static", "html"],
+  "author": "GlobalStay Team",
+  "license": "MIT"
+}
