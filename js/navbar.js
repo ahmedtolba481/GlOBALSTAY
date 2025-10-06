@@ -38,7 +38,7 @@ class NavbarComponent {
 
           <!-- Profile + Burger grouped on the right for < 1200px -->
           <div class="d-flex ms-auto align-items-center d-xl-none">
-            <ul class="navbar-nav align-items-center">
+            <ul class="navbar-nav flex-row align-items-center gap-2">
               ${this.generateAuthItems(true)}
             </ul>
             <button

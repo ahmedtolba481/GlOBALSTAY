@@ -164,6 +164,15 @@ body {
     bottom: auto;
     width: auto;
   }
+
+  /* Keep outside auth items inline next to burger */
+  .navbar .navbar-nav.flex-row .nav-item {
+    width: auto;
+    margin-bottom: 0;
+  }
+  .navbar .navbar-nav.flex-row .btn {
+    white-space: nowrap;
+  }
 }
 
 /* Ensure navbar doesn't clip the dropdown */
