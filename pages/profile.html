@@ -291,6 +291,9 @@
           // Save to localStorage for persistence
           localStorage.setItem('profilePicture', imageSrc);
           localStorage.setItem('profilePictureType', type);
+          
+          // Update navbar profile icon
+          updateNavbarProfileIcon(imageSrc, null);
         } else {
           // This is for preset avatars - handled by selectPresetAvatar function
         }
@@ -338,10 +341,50 @@
         localStorage.setItem('profilePictureIcon', newIconClass);
         localStorage.setItem('profilePictureType', avatarType);
         
+        // Update navbar profile icon
+        updateNavbarProfileIcon(null, newIconClass);
+        
         // Close dropdown
         const dropdownElement = document.getElementById('profilePictureMainDropdown');
         const dropdown = bootstrap.Dropdown.getInstance(dropdownElement) || new bootstrap.Dropdown(dropdownElement);
         dropdown.hide();
+      }
+
+      // Update navbar profile icon when profile picture changes
+      function updateNavbarProfileIcon(imageSrc, iconClass) {
+        // Find navbar profile icon elements
+        const navbarProfileIconImage = document.getElementById('profileIconImage') || document.getElementById('navbarProfileIconImage');
+        const navbarProfileIconFallback = document.getElementById('profileIconFallback') || document.getElementById('navbarProfileIconFallback');
+        
+        if (!navbarProfileIconImage || !navbarProfileIconFallback) return;
+
+        if (imageSrc) {
+          // Show uploaded image in navbar
+          navbarProfileIconImage.src = imageSrc;
+          navbarProfileIconImage.style.display = 'block';
+          navbarProfileIconFallback.style.display = 'none';
+        } else if (iconClass) {
+          // Show preset icon in navbar
+          navbarProfileIconImage.style.display = 'none';
+          
+          // Create new icon element
+          const newIcon = document.createElement('i');
+          newIcon.className = iconClass;
+          newIcon.style.color = 'white';
+          newIcon.style.fontSize = '18px';
+          newIcon.style.lineHeight = '1';
+          newIcon.style.display = 'flex';
+          newIcon.style.alignItems = 'center';
+          newIcon.style.justifyContent = 'center';
+          newIcon.style.width = '100%';
+          newIcon.style.height = '100%';
+          newIcon.style.position = 'relative';
+          newIcon.style.zIndex = '1';
+          
+          // Replace the fallback icon
+          navbarProfileIconFallback.parentNode.replaceChild(newIcon, navbarProfileIconFallback);
+          newIcon.id = navbarProfileIconFallback.id; // Preserve ID
+        }
       }
 
       // Load profile picture on page load
