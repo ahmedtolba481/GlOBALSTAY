@@ -256,12 +256,13 @@ body {
 }
 
 .profile-icon-container img {
-  width: 100% !important;
-  height: 100% !important;
+  width: 18px !important;
+  height: 18px !important;
   object-fit: cover !important;
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   border-radius: 50% !important;
   z-index: 2 !important;
 }
